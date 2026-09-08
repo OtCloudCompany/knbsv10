@@ -1,0 +1,83 @@
+:host {
+  display: inline-flex;
+}
+
+.knbs-mode__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: .375rem;
+  font-size: .8125rem;
+  text-decoration: none;
+  color: var(--knbs-topbar-fg);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--knbs-topbar-fg-hover);
+  }
+}
+
+// The label is a convenience on wide viewports; the icon alone carries it on small ones, where the
+// utility strip already wraps.
+.knbs-mode__current {
+  @include media-breakpoint-down(sm) {
+    display: none;
+  }
+}
+
+.knbs-mode__menu {
+  min-width: 16rem;
+  background: var(--knbs-surface);
+  border: 1px solid var(--knbs-gray);
+  border-top: 3px solid var(--knbs-gold);
+  border-radius: 0 0 var(--knbs-radius-sm) var(--knbs-radius-sm);
+  box-shadow: var(--knbs-shadow);
+  padding: .25rem 0;
+}
+
+.knbs-mode__option {
+  display: flex;
+  align-items: flex-start;
+  gap: .625rem;
+  padding: .5rem .875rem;
+  white-space: normal;
+  color: var(--knbs-ink);
+
+  &:hover,
+  &:focus-visible {
+    background: var(--knbs-light-brown);
+    color: var(--knbs-brown-dark);
+  }
+
+  &.active {
+    background: var(--knbs-light-brown);
+    color: var(--knbs-brown-dark);
+  }
+}
+
+.knbs-mode__swatch {
+  flex: 0 0 auto;
+  width: 1.125rem;
+  height: 1.125rem;
+  margin-top: .125rem;
+  border-radius: 3px;
+  border: 1px solid var(--knbs-gray);
+}
+
+.knbs-mode__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.knbs-mode__name {
+  display: flex;
+  align-items: center;
+  gap: .375rem;
+  font-weight: 600;
+  font-size: .875rem;
+}
+
+.knbs-mode__hint {
+  font-size: .75rem;
+  opacity: .75;
+}

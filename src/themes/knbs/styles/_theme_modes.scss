@@ -1,0 +1,260 @@
+/*** KNBS COLOUR MODES ********************************************************
+ * Light and medium treatments of the whole site, both built from the KNBS brand
+ * palette rather than a neutral gray ramp.
+ *
+ * KnbsModeService stamps data-knbs-mode="light|medium" on <html>, which selects
+ * the blocks below. Both modes keep dark text on a light ground, so Bootstrap's
+ * own colour mode is left at its light default and only DSpace's --ds-* chrome,
+ * which has no colour-mode support at all, has to be restated here.
+ *
+ * This file is imported last in theme.scss so the bare :root block below wins
+ * over the Bootstrap and DSpace defaults; that is also what renders during SSR
+ * and before the stored preference is read.
+ ****************************************************************************/
+
+/* ---------------------------------------------------------------- palettes */
+
+// Shared brand constants: gold and the deep browns read correctly in all three modes.
+$knbs-mode-gold: $knbs-gold;
+$knbs-mode-band: #4a2016; // topbar / footer band in the light and medium modes
+
+// LIGHT — white page, warm tints, warm near-black text.
+$light-page: #ffffff;
+$light-surface: #ffffff;
+$light-tint: #f7efec;
+$light-tint-strong: #efe0d9;
+$light-ink: #2a1a15;
+$light-line: #e7ddd8;
+$light-brown: #b06443;
+$light-brown-strong: #8d4f35;
+$light-green: #0b804b;
+
+// MEDIUM — warm parchment page with lifted near-white cards. A reading tone,
+// not a half-dark: the text stays dark, only the ground warms.
+$medium-page: #efe3dd;
+$medium-surface: #fbf7f4;
+$medium-tint: #e6d5cc;
+$medium-tint-strong: #dcc7bc;
+$medium-ink: #2a1a15;
+$medium-line: #d6c3ba;
+$medium-brown: #9c5537;
+$medium-brown-strong: #7d4229;
+$medium-green: #0a6d40;
+
+/* ------------------------------------------------------------ mode mixins */
+
+// Everything a mode has to say, stated once. The three callers below differ only
+// in the palette constants they hand in.
+@mixin knbs-mode(
+  $page, $surface, $tint, $tint-strong, $ink, $line, $brown, $brown-strong, $green,
+  $shadow-alpha, $hero-bg, $hero-fg, $hero-lead, $hero-accent,
+  $hero-search-border, $hero-search-shadow,
+  $chip-bg, $chip-border, $chip-fg, $chip-bg-hover, $chip-border-hover, $chip-fg-hover,
+  $band, $band-fg, $band-fg-hover, $on-brown, $breadcrumb-bg, $breadcrumb-fg
+) {
+  /*** KNBS tokens ***/
+  --knbs-surface: #{$surface};
+  --knbs-page: #{$page};
+  --knbs-light-brown: #{$tint};
+  --knbs-tint-strong: #{$tint-strong};
+  --knbs-gray: #{$line};
+  --knbs-ink: #{$ink};
+  --knbs-ink-muted: #{rgba($ink, .65)};
+  --knbs-brown: #{$brown};
+  --knbs-brown-dark: #{$brown-strong};
+  --knbs-brown-soft: #{rgba($brown, .12)};
+  --knbs-brown-line: #{rgba($brown, .35)};
+  --knbs-open-access: #{$green};
+  // Text that sits on a --knbs-brown or --knbs-gold fill.
+  --knbs-on-brown: #{$on-brown};
+  --knbs-on-gold: #{$light-ink};
+  --knbs-breadcrumb-bg: #{$breadcrumb-bg};
+  --knbs-breadcrumb-fg: #{$breadcrumb-fg};
+  // The KNBS logo is an opaque PNG with a white field baked in — it has no alpha channel, and its
+  // wordmark is black, so it cannot be reversed out. Instead of letting that white rectangle
+  // collide with the medium mode's warmer header, it is given a deliberate plate to sit on.
+  --knbs-logo-plate: #ffffff;
+  --knbs-shadow: 0 1px 2px #{rgba(#000000, $shadow-alpha)}, 0 8px 24px #{rgba(#000000, $shadow-alpha)};
+  --knbs-shadow-hover: 0 2px 4px #{rgba(#000000, $shadow-alpha * 1.4)}, 0 16px 32px #{rgba(#000000, $shadow-alpha * 1.6)};
+
+  /*** Sunburst palette — the brand slots follow the mode, the rest stay fixed hues ***/
+  --knbs-chart-palette-1: #{$brown};
+  --knbs-chart-palette-2: #{$knbs-mode-gold};
+  --knbs-chart-palette-3: #{$green};
+  --knbs-chart-palette-8: #{$ink};
+
+  /*** Section surfaces ***/
+  --knbs-topbar-bg: #{$band};
+  --knbs-topbar-fg: #{$band-fg};
+  --knbs-topbar-fg-strong: #ffffff;
+  --knbs-topbar-fg-hover: #{$band-fg-hover};
+  --knbs-surface-dark: #{$band};
+
+  --knbs-hero-bg: #{$hero-bg};
+  --knbs-hero-fg: #{$hero-fg};
+  --knbs-hero-lead: #{$hero-lead};
+  --knbs-hero-accent: #{$hero-accent};
+  --knbs-hero-search-border: #{$hero-search-border};
+  --knbs-hero-search-shadow: #{$hero-search-shadow};
+
+  --knbs-chip-bg: #{$chip-bg};
+  --knbs-chip-border: #{$chip-border};
+  --knbs-chip-fg: #{$chip-fg};
+  --knbs-chip-bg-hover: #{$chip-bg-hover};
+  --knbs-chip-border-hover: #{$chip-border-hover};
+  --knbs-chip-fg-hover: #{$chip-fg-hover};
+
+  /*** Bootstrap colour system ***/
+  --bs-body-bg: #{$page};
+  --bs-body-bg-rgb: #{red($page)}, #{green($page)}, #{blue($page)};
+  --bs-body-color: #{$ink};
+  --bs-body-color-rgb: #{red($ink)}, #{green($ink)}, #{blue($ink)};
+  --bs-emphasis-color: #{$ink};
+  --bs-emphasis-color-rgb: #{red($ink)}, #{green($ink)}, #{blue($ink)};
+  --bs-secondary-color: #{rgba($ink, .68)};
+  --bs-secondary-bg: #{$tint};
+  --bs-tertiary-color: #{rgba($ink, .5)};
+  --bs-tertiary-bg: #{$tint-strong};
+  --bs-heading-color: #{$ink};
+  --bs-border-color: #{$line};
+  --bs-border-color-translucent: #{rgba($ink, .15)};
+  --bs-link-color: #{$brown-strong};
+  --bs-link-color-rgb: #{red($brown-strong)}, #{green($brown-strong)}, #{blue($brown-strong)};
+  --bs-link-hover-color: #{$brown};
+  --bs-link-hover-color-rgb: #{red($brown)}, #{green($brown)}, #{blue($brown)};
+  --bs-primary: #{$brown};
+  --bs-primary-rgb: #{red($brown)}, #{green($brown)}, #{blue($brown)};
+  --bs-code-color: #{$brown-strong};
+  --bs-highlight-bg: #{rgba($knbs-mode-gold, .35)};
+
+  --bs-card-border-color: #{$line};
+  --bs-dropdown-border-color: #{$line};
+  --bs-dropdown-link-hover-bg: #{$tint};
+  --bs-dropdown-link-hover-color: #{$brown-strong};
+  --bs-table-color: #{$ink};
+  --bs-table-border-color: #{$line};
+
+  /*** DSpace chrome ***/
+  --ds-header-bg: #{$surface};
+  --ds-header-icon-color: #{$ink};
+  --ds-header-icon-color-hover: #{$brown-strong};
+  --ds-header-navbar-border-bottom-color: #{$line};
+
+  --ds-navbar-bg: #{$surface};
+  --ds-navbar-link-color: #{$ink};
+  --ds-navbar-link-color-hover: #{$brown-strong};
+  --ds-navbar-link-bg: transparent;
+  --ds-navbar-link-bg-hover: transparent;
+
+  --ds-expandable-navbar-bg: #{$surface};
+  --ds-expandable-navbar-link-color: #{$ink};
+  --ds-expandable-navbar-link-color-hover: #{$brown-strong};
+  --ds-expandable-navbar-link-bg-hover: #{$tint};
+
+  --ds-user-menu-bg: #{$surface};
+  --ds-user-menu-username-color: #{$ink};
+  --ds-user-menu-email-color: #{rgba($ink, .68)};
+
+  --ds-home-news-background-color: #{$tint};
+  --ds-home-news-link-color: #{$brown-strong};
+  --ds-home-news-link-hover-color: #{$brown};
+
+  --ds-top-footer-bg: #{$tint};
+  --ds-footer-bg: #{$band};
+  --ds-footer-border: 3px solid #{$brown};
+
+  --ds-thumbnail-placeholder-background: #{$tint};
+  --ds-thumbnail-placeholder-border: 1px solid #{$line};
+  --ds-thumbnail-placeholder-color: #{rgba($ink, .55)};
+
+  --ds-dso-selector-current-background-color: #{$tint};
+  --ds-dso-selector-current-background-hover-color: #{$tint-strong};
+
+  --ds-slider-color: #{$brown};
+  --ds-slider-handle-color: #{$brown-strong};
+
+  --ds-primary-bg: #{$brown};
+  --ds-secondary-bg: #{$tint-strong};
+  --ds-success-bg: #{$green};
+}
+
+@mixin knbs-mode-light {
+  @include knbs-mode(
+    $page: $light-page,
+    $surface: $light-surface,
+    $tint: $light-tint,
+    $tint-strong: $light-tint-strong,
+    $ink: $light-ink,
+    $line: $light-line,
+    $brown: $light-brown,
+    $brown-strong: $light-brown-strong,
+    $green: $light-green,
+    $shadow-alpha: .07,
+    $hero-bg: (radial-gradient(circle at 82% 12%, rgba($knbs-mode-gold, .16) 0, transparent 48%), linear-gradient(160deg, $light-tint 0%, $light-surface 100%)),
+    $hero-fg: $light-ink,
+    $hero-lead: rgba($light-ink, .65),
+    // Gold is 2.1:1 on the tint, so the micro-caps take the dark brown instead.
+    $hero-accent: $light-brown-strong,
+    $hero-search-border: $light-line,
+    $hero-search-shadow: 0 8px 24px rgba(#000000, .07),
+    $chip-bg: $light-surface,
+    $chip-border: rgba($light-brown, .35),
+    $chip-fg: $light-brown-strong,
+    $chip-bg-hover: $light-brown,
+    $chip-border-hover: $light-brown,
+    $chip-fg-hover: #ffffff,
+    $band: $knbs-mode-band,
+    $band-fg: rgba(#ffffff, .82),
+    $band-fg-hover: $knbs-mode-gold,
+    $on-brown: #ffffff,
+    // White on the mid brown is only 4.4:1, so the breadcrumb band takes the dark brown.
+    $breadcrumb-bg: $light-brown-strong,
+    $breadcrumb-fg: #ffffff
+  );
+}
+
+@mixin knbs-mode-medium {
+  @include knbs-mode(
+    $page: $medium-page,
+    $surface: $medium-surface,
+    $tint: $medium-tint,
+    $tint-strong: $medium-tint-strong,
+    $ink: $medium-ink,
+    $line: $medium-line,
+    $brown: $medium-brown,
+    $brown-strong: $medium-brown-strong,
+    $green: $medium-green,
+    $shadow-alpha: .10,
+    $hero-bg: (radial-gradient(circle at 82% 12%, rgba($knbs-mode-gold, .18) 0, transparent 48%), linear-gradient(160deg, $medium-tint-strong 0%, $medium-tint 100%)),
+    $hero-fg: $medium-ink,
+    $hero-lead: rgba($medium-ink, .68),
+    $hero-accent: $medium-brown-strong,
+    $hero-search-border: $medium-line,
+    $hero-search-shadow: 0 8px 24px rgba(#000000, .10),
+    $chip-bg: $medium-surface,
+    $chip-border: rgba($medium-brown, .38),
+    $chip-fg: $medium-brown-strong,
+    $chip-bg-hover: $medium-brown,
+    $chip-border-hover: $medium-brown,
+    $chip-fg-hover: #ffffff,
+    $band: $knbs-mode-band,
+    $band-fg: rgba(#ffffff, .82),
+    $band-fg-hover: $knbs-mode-gold,
+    $on-brown: #ffffff,
+    $breadcrumb-bg: $medium-brown-strong,
+    $breadcrumb-fg: #ffffff
+  );
+}
+
+/* ------------------------------------------------------------ mode blocks */
+
+// Bare :root carries light, so the page is correct during SSR and before the
+// stored preference has been applied.
+:root,
+:root[data-knbs-mode='light'] {
+  @include knbs-mode-light;
+}
+
+:root[data-knbs-mode='medium'] {
+  @include knbs-mode-medium;
+}

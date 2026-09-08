@@ -1,0 +1,5 @@
+<!-- The KNBS theme renders the navbar inside <ds-header> (see header.component.html), so this
+     wrapper only carries the header itself and the positioning context the mobile nav panel needs. -->
+<div [ngClass]="{'open': (isNavBarCollapsed$ | async) !== true}" id="header-navbar-wrapper">
+    <ds-header></ds-header>
+</div>

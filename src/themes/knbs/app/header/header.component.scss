@@ -1,0 +1,298 @@
+:host {
+  display: block;
+}
+
+/* ------------------------------------------------- government utility strip */
+
+.knbs-topbar {
+  background: var(--knbs-brown);
+  color: var(--knbs-topbar-fg);
+  font-size: .8125rem;
+}
+
+.knbs-topbar__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .25rem 1.25rem;
+  min-height: 2.25rem;
+  padding-top: .25rem;
+  padding-bottom: .25rem;
+}
+
+.knbs-topbar__gov {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  margin: 0;
+  min-width: 0;
+}
+
+// Kenyan flag: black / white / red / white / green horizontal bands
+.knbs-topbar__flag {
+  flex: 0 0 auto;
+  width: 22px;
+  height: 14px;
+  border-radius: 2px;
+  background: linear-gradient(to bottom,
+      #000000 0 32%,
+      #ffffff 32% 36%,
+      #bb0000 36% 64%,
+      #ffffff 64% 68%,
+      #006600 68% 100%);
+}
+
+.knbs-topbar__state {
+  font-weight: 700;
+  color: var(--knbs-topbar-fg-strong);
+}
+
+.knbs-topbar__sep {
+  opacity: .45;
+}
+
+.knbs-topbar__links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .25rem 1.25rem;
+
+  a {
+    color: var(--knbs-topbar-fg);
+    text-decoration: none;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--knbs-topbar-fg-hover);
+      text-decoration: underline;
+    }
+  }
+
+  // the language dropdown and skin switcher sit on the strip, so they follow its colours
+  ::ng-deep .dropdown-toggle {
+    color: var(--knbs-topbar-fg);
+
+    &:hover,
+    &:focus {
+      color: var(--knbs-topbar-fg-hover);
+    }
+  }
+}
+
+/* ------------------------------------------------------------ header proper */
+
+.knbs-header__main {
+  background: white;
+  border-bottom: 1px solid var(--knbs-gray);
+}
+
+.knbs-header__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 1.5rem;
+  min-height: 4.5rem;
+}
+
+/* ------------------------------------------------------------------- brand */
+
+.knbs-brand {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .5rem 0;
+  margin: 0;
+  text-decoration: none;
+  color: inherit;
+  min-width: 0;
+}
+
+// The logo ships as an opaque PNG on a white field, so rather than fighting it the mark is given a
+// plate of its own: padded and rounded, it reads as a deliberate logo panel in the medium and dark
+// modes instead of a stray white rectangle. In the light mode the plate matches the white header
+// and simply disappears. The padding is applied in every mode so switching does not shift layout.
+.knbs-brand__mark {
+  flex: 0 0 auto;
+  max-height: var(--ds-header-logo-height);
+  max-width: 100%;
+  padding: .25rem .5rem;
+  background: var(--knbs-logo-plate);
+  border-radius: var(--knbs-radius-sm);
+}
+
+.knbs-brand__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.knbs-brand__name {
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: .01em;
+  text-transform: uppercase;
+  color: var(--knbs-ink);
+}
+
+.knbs-brand__tagline {
+  font-size: .75rem;
+  line-height: 1.4;
+  color: var(--knbs-ink-muted);
+}
+
+.knbs-brand__sep {
+  padding: 0 .25rem;
+  opacity: .5;
+}
+
+.knbs-brand__host {
+  font-family: var(--knbs-mono-font);
+}
+
+/* ------------------------------------------ the main navigation, in the header */
+
+.knbs-header__nav {
+  display: block;
+  flex: 1 1 auto;
+  min-width: 0;
+
+  // the navbar renders its own bootstrap .container when it is not in mobile mode; inside the
+  // header row that would add a second set of gutters, so it is neutralised here
+  ::ng-deep .navbar-inner-container.container {
+    width: 100%;
+    max-width: none;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  ::ng-deep nav.navbar {
+    align-items: center;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .knbs-header__nav {
+    // roomier hit areas now that the sections sit on the header row
+    --ds-navbar-item-padding: 1.5rem .75rem;
+
+    ::ng-deep .navbar-nav {
+      flex-wrap: wrap;
+    }
+
+    // gold underline on hover / focus, in place of the base theme's background swap
+    ::ng-deep .ds-menu-item-wrapper:not(ds-user-menu .ds-menu-item-wrapper) {
+      position: relative;
+
+      >.ds-menu-item,
+      >.ds-menu-toggler-wrapper {
+        font-weight: 600;
+        font-size: .9375rem;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: .25rem;
+        right: .25rem;
+        bottom: 0;
+        height: 3px;
+        background: var(--knbs-gold);
+        opacity: 0;
+        transition: opacity .15s ease-in-out;
+      }
+
+      &:hover::after,
+      &:focus-within::after {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+@include media-breakpoint-down(md) {
+
+  // Below md the row is brand + actions, and the navigation is pushed onto a second, zero height
+  // line underneath them. That line is what the mobile panel — which is absolutely positioned
+  // against the header/navbar wrapper — uses as its static position, so it rolls down *below* the
+  // header row instead of over it.
+  .knbs-header__actions {
+    order: 2;
+  }
+
+  .knbs-header__nav {
+    order: 3;
+    flex: 0 0 100%;
+    height: 0;
+
+    ::ng-deep nav.navbar {
+      left: 0;
+    }
+  }
+}
+
+/* ----------------------------------------------------------- user actions */
+
+.knbs-header__actions {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--bs-spacer) / 3);
+  margin-left: auto;
+
+  div[role="toolbar"] {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--bs-spacer) / 3);
+  }
+}
+
+.knbs-header__submit {
+  align-items: center;
+  padding: .5rem 1rem;
+  border: 1px solid var(--knbs-brown);
+  border-radius: var(--knbs-radius-sm);
+  font-size: .875rem;
+  font-weight: 700;
+  color: var(--knbs-brown-dark);
+  text-decoration: none;
+  white-space: nowrap;
+
+  &:hover,
+  &:focus-visible {
+    background: var(--knbs-brown);
+    color: #ffffff;
+  }
+}
+
+.navbar-toggler {
+  border: none;
+  color: var(--ds-header-icon-color);
+
+  &:hover,
+  &:focus {
+    color: var(--ds-header-icon-color-hover);
+  }
+
+  .toggler-icon {
+    width: 1.5em;
+    height: 1.5em;
+    line-height: 1.5;
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .knbs-brand__name {
+    font-size: .8125rem;
+  }
+
+  .knbs-brand__tagline {
+    display: none;
+  }
+
+  .knbs-header__row {
+    min-height: 3.5rem;
+  }
+}

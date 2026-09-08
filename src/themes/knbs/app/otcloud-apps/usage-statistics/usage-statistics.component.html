@@ -1,0 +1,84 @@
+<div class="my-4" *ngIf="reportsLoaded">
+    <h4 class="simple-view-element-header">{{ "item.page.usageStatistics" | translate }}</h4>
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button type="button" class="nav-link" [class.active]="activeTab === 1" role="tab"
+                [attr.aria-selected]="activeTab === 1" (click)="activeTab = 1">
+                {{ "item.page.visitsByMonth" | translate }}
+            </button>
+        </li>
+        <li class="nav-item" role="presentation" *ngIf="countriesTableData.length > 0">
+            <button type="button" class="nav-link" [class.active]="activeTab === 2" role="tab"
+                [attr.aria-selected]="activeTab === 2" (click)="activeTab = 2">
+                {{ "item.page.topCountries" | translate }}
+            </button>
+        </li>
+        <li class="nav-item" role="presentation" *ngIf="cityViews.length > 0">
+            <button type="button" class="nav-link" [class.active]="activeTab === 3" role="tab"
+                [attr.aria-selected]="activeTab === 3" (click)="activeTab = 3">
+                {{ "item.page.topCities" | translate }}
+            </button>
+        </li>
+    </ul>
+    <div class="mt-2">
+        <div *ngIf="activeTab === 1" role="tabpanel">
+            <div class="bg-light p-2">
+                <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions"
+                    style="width: 100%; height: 400px; display: block;">
+                </highcharts-chart>
+            </div>
+        </div>
+        <div *ngIf="activeTab === 2" role="tabpanel">
+            <div id="countriesMapContainer" style="width: 100%;">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead class="bg-light">
+                            <th>#</th>
+                            <th>{{ "item.page.stats.country" | translate }}</th>
+                            <th>{{ "item.page.views" | translate }}</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let country of countriesTableData; ">
+                                <td>{{ country['indexNum'] }}</td>
+                                <td>{{ country['countryLabel'] }}</td>
+                                <td>{{ country['value'] }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="bg-light p-2">
+                    <highcharts-chart [Highcharts]="Highcharts" [constructorType]="'mapChart'"
+                        [options]="mapChartOptions" style="width: 100%; height: 400px; display: block;">
+                    </highcharts-chart>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="activeTab === 3" role="tabpanel">
+            <div id="citiesMapContainer" style="width: 100%;">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead class="bg-light">
+                            <th>#</th>
+                            <th>{{ "item.page.city" | translate }}</th>
+                            <th>{{ "item.page.views" | translate }}</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let city of citiesTableData; ">
+                                <td>{{ city['indexNum'] }}</td>
+                                <td>{{ city['cityLabel'] }}</td>
+                                <td>{{ city['value'] }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div><!-- .table-responsive -->
+                <div class="bg-light p-2">
+                    <div class="bg-light p-2">
+                        <highcharts-chart [Highcharts]="Highcharts" [options]="citiesBarGraphOptions"
+                            style="width: 100%; height: 400px; display: block;">
+                        </highcharts-chart>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

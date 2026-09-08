@@ -1,0 +1,410 @@
+:host {
+  display: block;
+}
+
+.knbs-explorer {
+  margin-bottom: var(--knbs-section-gap);
+}
+
+.knbs-eyebrow {
+  margin: 0 0 .25rem;
+  font-family: var(--knbs-mono-font);
+  font-size: .75rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--knbs-brown);
+}
+
+.knbs-explorer__title {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--knbs-ink);
+}
+
+.knbs-explorer__lead {
+  margin: .35rem 0 1.25rem;
+  // max-width: 65ch;
+  color: var(--knbs-ink-muted);
+}
+
+.knbs-explorer__card {
+  background: var(--knbs-surface);
+  border: 1px solid var(--knbs-gray);
+  border-radius: var(--knbs-radius);
+  box-shadow: var(--knbs-shadow);
+  overflow: hidden;
+}
+
+.knbs-explorer__state {
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  text-align: center;
+  color: var(--knbs-ink-muted);
+}
+
+.knbs-explorer__grid {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  min-height: var(--knbs-explorer-height);
+}
+
+/* ------------------------------------------------------------------ the list */
+
+.knbs-explorer__chart,
+.knbs-explorer__list {
+  background: linear-gradient(180deg, var(--knbs-light-brown) 0, var(--knbs-light-brown) 180px);
+}
+
+.knbs-explorer__list {
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem 0 1rem;
+  // border-right: 1px solid var(--knbs-gray);
+
+}
+
+.knbs-explorer__list-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  padding: 0 1.25rem .75rem;
+  border-bottom: 1px solid var(--knbs-gray);
+}
+
+.knbs-explorer__list-title {
+  font-size: .8125rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--knbs-ink);
+}
+
+.knbs-tree {
+  flex: 1 1 auto;
+  margin: 0;
+  padding: .5rem 0;
+  list-style: none;
+  overflow-y: auto;
+  max-height: calc(var(--knbs-explorer-height) - 130px);
+}
+
+.knbs-tree__children {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.knbs-tree__row {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .4rem 1.25rem .4rem .75rem;
+  border-left: 3px solid transparent;
+  transition: background-color .15s ease, border-color .15s ease;
+
+  &.is-active {
+    background: var(--knbs-brown-soft);
+    border-left-color: var(--knbs-brown);
+  }
+}
+
+.knbs-tree__row--level-0 {
+  font-weight: 600;
+  color: var(--knbs-ink);
+}
+
+.knbs-tree__row--level-1 {
+  padding-left: 1.75rem;
+  font-size: .9375rem;
+}
+
+.knbs-tree__row--level-2 {
+  padding-left: 2.75rem;
+  font-size: .875rem;
+  color: var(--knbs-ink-muted);
+}
+
+.knbs-tree__toggle {
+  flex: 0 0 auto;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: var(--knbs-radius-sm);
+  background: transparent;
+  color: var(--knbs-brown);
+  font-size: .75rem;
+
+  &:hover {
+    background: var(--knbs-light-brown);
+  }
+}
+
+.knbs-tree__toggle--leaf {
+  visibility: hidden;
+}
+
+.knbs-tree__name {
+  flex: 1 1 auto;
+  min-width: 0;
+  color: inherit;
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--knbs-brown-dark);
+    text-decoration: underline;
+  }
+}
+
+.knbs-badge {
+  flex: 0 0 auto;
+  min-width: 3.25rem;
+  padding: .125rem .5rem;
+  border-radius: 999px;
+  background: var(--knbs-brown);
+  color: #fff;
+  font-family: var(--knbs-mono-font);
+  font-size: .75rem;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.knbs-badge--soft {
+  background: var(--knbs-light-brown);
+  color: var(--knbs-brown-dark);
+}
+
+.knbs-badge--total {
+  background: var(--knbs-ink);
+}
+
+.knbs-explorer__all {
+  margin: .5rem 1.25rem 0;
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--knbs-brown-dark);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+/* ----------------------------------------------------------------- the chart */
+
+.knbs-explorer__chart {
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem;
+  min-width: 0;
+}
+
+.knbs-explorer__breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .35rem;
+  min-height: 1.75rem;
+  font-family: var(--knbs-mono-font);
+  font-size: .75rem;
+  color: var(--knbs-ink-muted);
+}
+
+.knbs-explorer__crumb--root {
+  font-weight: 700;
+  color: var(--knbs-brown);
+}
+
+.knbs-explorer__crumb-sep {
+  opacity: .5;
+}
+
+// Zooming back out. Highcharts' own traversal breadcrumb is hidden further down, so this row is the
+// only way back up the tree short of clicking the core of the wheel.
+.knbs-explorer__crumb--button {
+  padding: 0;
+  border: 0;
+  background: none;
+  // Not the `font` shorthand: it would reset the bold on the root crumb as well
+  font-family: inherit;
+  font-size: inherit;
+  letter-spacing: inherit;
+  color: var(--knbs-brown-dark);
+  text-decoration: underline;
+  text-underline-offset: .15em;
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--knbs-ink);
+  }
+}
+
+.knbs-explorer__canvas {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 360px;
+}
+
+.knbs-explorer__sunburst {
+  position: absolute;
+  inset: 0;
+}
+
+// Highcharts' own traversal breadcrumb has no `enabled` option, and it would sit right under ours
+// repeating the same path in Highcharts' default blue. The themed breadcrumb above the canvas is
+// clickable in its place. ::ng-deep because the chart's SVG is created outside this template.
+:host ::ng-deep .knbs-explorer__sunburst .highcharts-breadcrumbs {
+  display: none;
+}
+
+.knbs-explorer__core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  max-width: 11rem;
+  text-align: center;
+}
+
+.knbs-explorer__core-label {
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  line-height: 1.25;
+  text-transform: uppercase;
+  color: var(--knbs-brown-dark);
+  // Two lines rather than an ellipsis: zoomed in, the core carries the name of the wedge the user
+  // just opened, and most of those names do not fit on one line
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.knbs-explorer__core-value {
+  font-family: var(--knbs-mono-font);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--knbs-ink);
+}
+
+.knbs-explorer__core-unit {
+  font-size: .6875rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--knbs-ink-muted);
+}
+
+.knbs-explorer__dock {
+  min-height: 92px;
+  margin-top: .75rem;
+  padding-top: .75rem;
+  border-top: 1px dashed var(--knbs-gray);
+}
+
+.knbs-explorer__hovercard {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    'type  count'
+    'name  count'
+    'link  count';
+  gap: .1rem .75rem;
+  align-items: center;
+
+  p {
+    margin: 0;
+  }
+}
+
+.knbs-explorer__hovercard-type {
+  grid-area: type;
+  font-family: var(--knbs-mono-font);
+  font-size: .6875rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--knbs-brown);
+}
+
+.knbs-explorer__hovercard-name {
+  grid-area: name;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--knbs-ink);
+}
+
+.knbs-explorer__hovercard-count {
+  grid-area: count;
+  font-family: var(--knbs-mono-font);
+  font-size: .875rem;
+  color: var(--knbs-ink-muted);
+
+  strong {
+    font-size: 1.25rem;
+    color: var(--knbs-ink);
+  }
+}
+
+.knbs-explorer__hovercard-link {
+  grid-area: link;
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--knbs-brown-dark);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.knbs-explorer__hint {
+  margin: 0;
+  font-size: .875rem;
+  color: var(--knbs-ink-muted);
+}
+
+/* ---------------------------------------------------------------- responsive */
+
+@include media-breakpoint-down(md) {
+  .knbs-explorer__grid {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .knbs-explorer__list {
+    border-right: 0;
+    background: var(--knbs-surface);
+  }
+
+  .knbs-tree {
+    max-height: none;
+    overflow-y: visible;
+  }
+
+  // Below the md breakpoint the sunburst is dropped entirely: the tree above already carries the
+  // same information as an accordion, and a 3-tier sunburst is unreadable at this width.
+  .knbs-explorer__chart {
+    display: none;
+  }
+}

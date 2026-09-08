@@ -1,0 +1,158 @@
+<section class="knbs-explorer" id="statistical-domains">
+  <header class="knbs-explorer__intro">
+    <p class="knbs-eyebrow">{{ 'knbs.explorer.eyebrow' | translate }}</p>
+    <h2 class="knbs-explorer__title">{{ 'knbs.explorer.title' | translate }}</h2>
+    <p class="knbs-explorer__lead">{{ 'knbs.explorer.lead' | translate }}</p>
+  </header>
+
+  <div class="knbs-explorer__card">
+    @if (loading) {
+      <div class="knbs-explorer__state">
+        <ds-loading message="{{ 'knbs.explorer.loading' | translate }}"></ds-loading>
+      </div>
+    } @else if (failed) {
+      <div class="knbs-explorer__state knbs-explorer__state--empty">
+        <p>{{ 'knbs.explorer.empty' | translate }}</p>
+        <a class="btn btn-outline-primary" routerLink="/community-list">{{ 'knbs.explorer.browse-all' | translate }}</a>
+      </div>
+    } @else {
+      <div class="knbs-explorer__grid">
+
+        <!-- Left column: expandable listing of the statistical domains -->
+        <div class="knbs-explorer__list">
+          <div class="knbs-explorer__list-head">
+            <span class="knbs-explorer__list-title">{{ 'knbs.explorer.list.head' | translate }}</span>
+            <span class="knbs-badge knbs-badge--total">
+              {{ total | number }}
+              <span class="visually-hidden">{{ 'knbs.explorer.core.items' | translate }}</span>
+            </span>
+          </div>
+
+          <ul class="knbs-tree" role="tree" [attr.aria-label]="'knbs.explorer.list.head' | translate">
+            @for (community of topNodes; track community.id) {
+              <li class="knbs-tree__item" role="treeitem" [attr.aria-expanded]="isExpanded(community)">
+                <div class="knbs-tree__row knbs-tree__row--level-0"
+                     [class.is-active]="activeNode?.id === community.id"
+                     (mouseenter)="onNodeFocus(community)"
+                     (mouseleave)="onNodeBlur()">
+                  @if (community.children.length > 0) {
+                    <button type="button" class="knbs-tree__toggle" (click)="toggleExpanded(community)"
+                            [attr.aria-expanded]="isExpanded(community)"
+                            [attr.aria-label]="((isExpanded(community) ? 'knbs.explorer.collapse' : 'knbs.explorer.expand') | translate:{ name: community.name })">
+                      <i class="fas" [class.fa-chevron-down]="isExpanded(community)"
+                         [class.fa-chevron-right]="!isExpanded(community)" aria-hidden="true"></i>
+                    </button>
+                  } @else {
+                    <span class="knbs-tree__toggle knbs-tree__toggle--leaf" aria-hidden="true"></span>
+                  }
+                  <a class="knbs-tree__name" [routerLink]="community.route"
+                     (focus)="onNodeFocus(community)" (blur)="onNodeBlur()">{{ community.name }}</a>
+                  <span class="knbs-badge">{{ community.count | number }}</span>
+                </div>
+
+                @if (isExpanded(community)) {
+                  <ul class="knbs-tree__children" role="group">
+                    @for (child of community.children; track child.id) {
+                      <li class="knbs-tree__item" role="treeitem" [attr.aria-expanded]="child.children.length > 0 ? isExpanded(child) : null">
+                        <div class="knbs-tree__row knbs-tree__row--level-1"
+                             [class.is-active]="activeNode?.id === child.id"
+                             (mouseenter)="onNodeFocus(child)"
+                             (mouseleave)="onNodeBlur()">
+                          @if (child.children.length > 0) {
+                            <button type="button" class="knbs-tree__toggle" (click)="toggleExpanded(child)"
+                                    [attr.aria-expanded]="isExpanded(child)"
+                                    [attr.aria-label]="((isExpanded(child) ? 'knbs.explorer.collapse' : 'knbs.explorer.expand') | translate:{ name: child.name })">
+                              <i class="fas" [class.fa-chevron-down]="isExpanded(child)"
+                                 [class.fa-chevron-right]="!isExpanded(child)" aria-hidden="true"></i>
+                            </button>
+                          } @else {
+                            <span class="knbs-tree__toggle knbs-tree__toggle--leaf" aria-hidden="true"></span>
+                          }
+                          <a class="knbs-tree__name" [routerLink]="child.route"
+                             (focus)="onNodeFocus(child)" (blur)="onNodeBlur()">{{ child.name }}</a>
+                          <span class="knbs-badge knbs-badge--soft">{{ child.count | number }}</span>
+                        </div>
+
+                        @if (isExpanded(child)) {
+                          <ul class="knbs-tree__children" role="group">
+                            @for (collection of child.children; track collection.id) {
+                              <li class="knbs-tree__item" role="treeitem">
+                                <div class="knbs-tree__row knbs-tree__row--level-2"
+                                     [class.is-active]="activeNode?.id === collection.id"
+                                     (mouseenter)="onNodeFocus(collection)"
+                                     (mouseleave)="onNodeBlur()">
+                                  <span class="knbs-tree__toggle knbs-tree__toggle--leaf" aria-hidden="true"></span>
+                                  <a class="knbs-tree__name" [routerLink]="collection.route"
+                                     (focus)="onNodeFocus(collection)" (blur)="onNodeBlur()">{{ collection.name }}</a>
+                                  <span class="knbs-badge knbs-badge--soft">{{ collection.count | number }}</span>
+                                </div>
+                              </li>
+                            }
+                          </ul>
+                        }
+                      </li>
+                    }
+                  </ul>
+                }
+              </li>
+            }
+          </ul>
+
+          <a class="knbs-explorer__all" routerLink="/community-list">
+            {{ 'knbs.explorer.browse-all' | translate }} <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+
+        <!-- Right column: the sunburst itself -->
+        <div class="knbs-explorer__chart">
+          <nav class="knbs-explorer__breadcrumb" [attr.aria-label]="'knbs.explorer.breadcrumb' | translate">
+            @if (zoomedNode) {
+              <button type="button" class="knbs-explorer__crumb knbs-explorer__crumb--root knbs-explorer__crumb--button"
+                      (click)="zoomTo(null)">KNBS</button>
+            } @else {
+              <span class="knbs-explorer__crumb knbs-explorer__crumb--root">KNBS</span>
+            }
+            @for (crumb of breadcrumb; track crumb.id) {
+              <span class="knbs-explorer__crumb-sep" aria-hidden="true">/</span>
+              @if (isZoomable(crumb)) {
+                <button type="button" class="knbs-explorer__crumb knbs-explorer__crumb--button"
+                        (click)="zoomTo(crumb)">{{ crumb.name }}</button>
+              } @else {
+                <span class="knbs-explorer__crumb">{{ crumb.name }}</span>
+              }
+            }
+          </nav>
+
+          <div class="knbs-explorer__canvas">
+            <div class="knbs-explorer__sunburst" #chartContainer></div>
+            <div class="knbs-explorer__core" aria-hidden="true">
+              <span class="knbs-explorer__core-label">{{ zoomedNode ? zoomedNode.name : 'KNBS' }}</span>
+              <span class="knbs-explorer__core-value">{{ (zoomedNode ? zoomedNode.count : total) | number }}</span>
+              <span class="knbs-explorer__core-unit">{{ 'knbs.explorer.core.items' | translate }}</span>
+            </div>
+          </div>
+
+          <div class="knbs-explorer__dock" aria-live="polite">
+            @if (activeNode) {
+              <div class="knbs-explorer__hovercard">
+                <p class="knbs-explorer__hovercard-type">
+                  {{ (activeNode.type === 'community' ? 'knbs.explorer.type.community' : 'knbs.explorer.type.collection') | translate }}
+                </p>
+                <p class="knbs-explorer__hovercard-name">{{ activeNode.name }}</p>
+                <p class="knbs-explorer__hovercard-count">
+                  <strong>{{ activeNode.count | number }}</strong> {{ 'knbs.explorer.core.items' | translate }}
+                </p>
+                <a class="knbs-explorer__hovercard-link" [routerLink]="activeNode.route">
+                  {{ 'knbs.explorer.open' | translate }} <span aria-hidden="true">&rarr;</span>
+                </a>
+              </div>
+            } @else {
+              <p class="knbs-explorer__hint">{{ 'knbs.explorer.hint' | translate }}</p>
+            }
+          </div>
+        </div>
+
+      </div>
+    }
+  </div>
+</section>

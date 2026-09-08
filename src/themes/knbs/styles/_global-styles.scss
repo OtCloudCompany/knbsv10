@@ -1,0 +1,126 @@
+// Add any global css for the theme here
+
+// imports the base global style
+@import '../../../styles/_global-styles.scss';
+
+// Brand tokens live in _theme_css_variable_overrides.scss
+:root {
+    // --knbs-light-gray was never defined, which left this custom property invalid and made
+    // Highcharts fall back to the SVG initial fill (black) for chart backgrounds. bg-light is
+    // Bootstrap's own --bs-light (#f8f9fa), already guaranteed to exist.
+    --highcharts-background-color: var(--bs-light) !important;
+}
+
+// KNBS has no dark mode (see _theme_modes.scss) — both its "light" and "medium" modes are dark
+// text on a light ground. Highcharts still lets the browser's OS-level dark-mode preference pick
+// its own light/dark palette via color-scheme + light-dark(), independent of the site's own theme.
+// Pinning it to light keeps chart backgrounds, axis labels, titles and gridlines legible and
+// consistent with the rest of the site regardless of the visitor's OS setting.
+.highcharts-container {
+    color-scheme: light !important;
+}
+
+.bg-knbs-brown {
+    background-color: var(--knbs-brown);
+}
+
+.bg-knbs-light-brown {
+    background-color: var(--knbs-light-brown);
+}
+
+.bg-knbs-gray {
+    background-color: var(--knbs-gray);
+}
+
+.text-knbs-brown {
+    color: var(--knbs-brown);
+}
+
+.text-knbs-light-brown {
+    color: var(--knbs-light-brown);
+}
+
+.text-knbs-gray {
+    color: var(--knbs-gray);
+}
+
+.border-knbs-brown {
+    border-color: var(--knbs-brown);
+}
+
+.border-knbs-light-brown {
+    border-color: var(--knbs-light-brown);
+}
+
+.border-knbs-gray {
+    border-color: var(--knbs-gray);
+}
+
+/* The main navigation now lives inside the white header row (themes/knbs/app/header), so the
+   brown band overrides that used to repaint it here have been removed: the navigation takes its
+   colours from the --ds-navbar-* / --ds-expandable-navbar-* variables in the theme stylesheets.
+   Only the dropdown panel needs a lift, because it now floats over white page content. */
+
+#main-navbar .ds-menu-item-wrapper:not(ds-user-menu .ds-menu-item-wrapper) .dropdown-menu {
+    border: 1px solid var(--knbs-gray);
+    border-top: 3px solid var(--knbs-gold);
+    border-radius: 0 0 var(--knbs-radius-sm) var(--knbs-radius-sm);
+    box-shadow: var(--knbs-shadow);
+}
+
+/* Sign in / sign out read as the primary action button in the header row */
+.loginLink,
+.dropdownLogin,
+.logoutLink,
+.dropdownLogout {
+    color: var(--knbs-on-brown) !important;
+    background-color: var(--knbs-brown) !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: var(--knbs-radius-sm) !important;
+    margin-left: 0.25rem !important;
+    margin-right: 0 !important;
+}
+
+.loginLink:hover,
+.dropdownLogin:hover,
+.logoutLink:hover,
+.dropdownLogout:hover {
+    background-color: var(--knbs-gold) !important;
+    /* White on gold is 2.4:1 in every mode, so the hover state takes dark text. */
+    color: var(--knbs-on-gold) !important;
+}
+
+#main-content {
+    margin-top: 0 !important;
+}
+
+.nav-breadcrumb {
+    background-color: var(--knbs-brown) !important;
+}
+
+li.breadcrumb-item a {
+    color: var(--knbs-breadcrumb-fg) !important;
+}
+
+.item-page {
+    padding-top: 20px !important;
+}
+
+.ds-menu-item-wrapper .ds-menu-item {
+    font-weight: 600 !important;
+    font-size: 0.9375rem !important;
+}
+
+#citationSelect {
+    background-color: var(--knbs-light-brown) !important;
+}
+
+#bibliographicManagers .nav-link {
+    cursor: pointer !important;
+}
+
+#bibliographicManagers .nav-link img {
+    max-height: 25px !important;
+}

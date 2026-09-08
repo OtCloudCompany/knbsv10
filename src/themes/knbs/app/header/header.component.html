@@ -1,0 +1,57 @@
+<header class="knbs-header">
+
+    <!-- Government utility strip: who publishes this repository, and where else to go -->
+    <div class="knbs-topbar">
+        <div class="container knbs-topbar__inner">
+            <p class="knbs-topbar__gov">
+                <!-- <span class="knbs-topbar__flag" aria-hidden="true"></span> -->
+                <span class="knbs-topbar__state">{{ 'knbs.header.gov.state' | translate }}</span>
+                <span class="knbs-topbar__sep" aria-hidden="true">|</span>
+                <span class="knbs-topbar__role">{{ 'knbs.header.gov.role' | translate }}</span>
+            </p>
+
+            <nav class="knbs-topbar__links" [attr.aria-label]="'knbs.header.utility' | translate">
+                @for (link of utilityLinks; track link.labelKey) {
+                <a [href]="link.href" target="_blank" rel="noopener">{{ link.labelKey | translate }}</a>
+                }
+                <ds-knbs-mode-switcher></ds-knbs-mode-switcher>
+                <ds-lang-switch></ds-lang-switch>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main header: brand, the main navigation and the user actions on a single row -->
+    <div class="knbs-header__main">
+        <div class="container knbs-header__row">
+
+            <a class="navbar-brand knbs-brand" routerLink="/home" role="button" tabindex="0">
+                <img class="knbs-brand__mark" src="assets/knbs/images/knbs-logo.png"
+                    [attr.alt]="'menu.header.image.logo' | translate" />
+            </a>
+
+            <!-- The main navigation lives inside the header on desktop; below md it collapses into the
+           mobile panel toggled by the burger button on the right of this row. -->
+            <ds-navbar class="knbs-header__nav"></ds-navbar>
+
+            <div class="knbs-header__actions navbar navbar-light navbar-expand-md flex-shrink-0 px-0">
+                <ds-search-navbar></ds-search-navbar>
+
+                <div role="toolbar" [attr.aria-label]="'nav.user.description' | translate">
+                    <ds-context-help-toggle></ds-context-help-toggle>
+                    <ds-auth-nav-menu></ds-auth-nav-menu>
+                    <ds-impersonate-navbar></ds-impersonate-navbar>
+                </div>
+
+                @if (isMobile$ | async) {
+                <div class="ps-2">
+                    <button class="navbar-toggler px-0" type="button" (click)="toggleNavbar()"
+                        aria-controls="collapsingNav" aria-expanded="false"
+                        [attr.aria-label]="'nav.toggle' | translate">
+                        <span class="fas fa-bars fa-fw toggler-icon" aria-hidden="true"></span>
+                    </button>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</header>

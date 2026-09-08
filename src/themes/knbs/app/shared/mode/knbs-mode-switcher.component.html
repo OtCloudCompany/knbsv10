@@ -1,0 +1,26 @@
+<div ngbDropdown class="knbs-mode" display="dynamic" placement="bottom-right">
+    <button type="button" class="dropdown-toggle btn btn-link px-0 knbs-mode__toggle" ngbDropdownToggle
+        aria-haspopup="menu" aria-controls="knbs-mode-menu" [title]="'knbs.mode.label' | translate"
+        [attr.aria-label]="'knbs.mode.label' | translate" data-test="knbs-mode-switch">
+        <i class="fas fa-fw" [class]="activeOption().icon" aria-hidden="true"></i>
+        <!-- <span class="knbs-mode__current">{{ activeOption().labelKey | translate }}</span> -->
+    </button>
+
+    <div ngbDropdownMenu id="knbs-mode-menu" class="dropdown-menu knbs-mode__menu" role="listbox"
+        [attr.aria-label]="'knbs.mode.label' | translate">
+        @for (option of modeService.modes; track option.id) {
+        <button type="button" class="dropdown-item knbs-mode__option" role="option"
+            [class.active]="option.id === modeService.current()"
+            [attr.aria-selected]="option.id === modeService.current()" (click)="select(option.id)">
+            <span class="knbs-mode__swatch" [style.background]="option.swatch" aria-hidden="true"></span>
+            <span class="knbs-mode__text">
+                <span class="knbs-mode__name">
+                    <i class="fas fa-fw" [class]="option.icon" aria-hidden="true"></i>
+                    {{ option.labelKey | translate }}
+                </span>
+                <span class="knbs-mode__hint">{{ option.descriptionKey | translate }}</span>
+            </span>
+        </button>
+        }
+    </div>
+</div>

@@ -1,0 +1,58 @@
+// Override or add CSS variables for your theme here.
+// Component stylesheets are compiled in isolation (only src/styles/_variables.scss and
+// _mixins.scss are injected into them), so every KNBS brand value that a component needs
+// has to be exposed here as a CSS custom property.
+
+:root {
+  /*** KNBS brand tokens ***/
+  --knbs-brown: #{$knbs-brown};
+  --knbs-brown-dark: #{$knbs-brown-dark};
+  --knbs-brown-soft: #{rgba($knbs-brown, 0.12)};
+  --knbs-brown-line: #{rgba($knbs-brown, 0.35)};
+  --knbs-light-brown: #{$knbs-light-brown};
+  --knbs-gray: #{$knbs-gray};
+  --knbs-ink: #{$knbs-ink};
+  --knbs-ink-muted: #{rgba($knbs-ink, 0.65)};
+  --knbs-gold: #{$knbs-gold};
+  --knbs-gold-dark: #{$knbs-gold-dark};
+  --knbs-ink-deep: #{$knbs-ink-deep};
+  --knbs-open-access: #{$knbs-open-access};
+  --knbs-surface: #ffffff;
+  --knbs-mono-font: 'JetBrains Mono', 'Roboto Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --knbs-radius: 12px;
+  --knbs-radius-sm: 8px;
+  --knbs-shadow: 0 1px 2px #{rgba($knbs-ink, 0.06)}, 0 8px 24px #{rgba($knbs-ink, 0.06)};
+  --knbs-shadow-hover: 0 2px 4px #{rgba($knbs-ink, 0.08)}, 0 16px 32px #{rgba($knbs-ink, 0.10)};
+  --knbs-section-gap: 3rem;
+
+  /*** Sunburst / domain explorer ***/
+  --knbs-explorer-height: 570px;
+  --knbs-chart-palette-1: #{$knbs-brown};
+  --knbs-chart-palette-2: #{$knbs-gold};
+  --knbs-chart-palette-3: #{$knbs-open-access};
+  --knbs-chart-palette-4: #3f6f8f;
+  --knbs-chart-palette-5: #8a5a83;
+  --knbs-chart-palette-6: #c2703c;
+  --knbs-chart-palette-7: #4f7a5b;
+  --knbs-chart-palette-8: #{$knbs-ink};
+
+  /*** DSpace chrome ***/
+  --ds-header-logo-height: 56px;
+
+  // Main navigation: rendered inside the header row, so no band background and no hover fill —
+  // the gold underline in header.component.scss carries the state instead.
+  --ds-navbar-link-bg: transparent;
+  --ds-navbar-link-bg-hover: transparent;
+  --ds-expandable-navbar-link-color: #{$knbs-ink};
+  --ds-expandable-navbar-link-color-hover: #{$knbs-brown-dark};
+  --ds-expandable-navbar-link-bg-hover: #{$knbs-light-brown};
+
+  // --ds-footer-bg is set per skin at the bottom of this file.
+  --ds-top-footer-bg: #{$knbs-light-brown};
+  --ds-footer-border: 3px solid #{$knbs-brown};
+  --ds-footer-padding: 0;
+}
+
+// The light / medium / dark colour modes live in _theme_modes.scss, which is imported last so its
+// bare :root block can override the Bootstrap and DSpace defaults set above.

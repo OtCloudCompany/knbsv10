@@ -1,0 +1,55 @@
+<section class="knbs-hero">
+  <div class="container knbs-hero__inner">
+    <p class="knbs-hero__eyebrow">{{ 'knbs.home.hero.eyebrow' | translate }}</p>
+    <h1 class="knbs-hero__title">{{ 'knbs.home.hero.title' | translate }}</h1>
+    <p class="knbs-hero__lead">{{ 'knbs.home.hero.lead' | translate }}</p>
+
+    <div class="knbs-hero__search">
+      <ds-search-form [inPlaceSearch]="false" [showScopeSelector]="true" [brandColor]="'knbs-brown'"
+        [searchPlaceholder]="'knbs.home.search.placeholder' | translate">
+      </ds-search-form>
+    </div>
+
+    <nav class="knbs-hero__trending" [attr.aria-label]="'knbs.home.hero.trending.label' | translate">
+      <span class="knbs-hero__trending-head">{{ 'knbs.home.hero.trending' | translate }}</span>
+      @for (term of trendingSearches; track term) {
+      <a class="knbs-chip" routerLink="/search" [queryParams]="{ query: term }">{{ term }}</a>
+      }
+    </nav>
+  </div>
+</section>
+
+@if (homeHeaderMetadataValue$ | async; as homeHeaderMetadataValue) {
+<div class="container home-header">
+  <ds-markdown-viewer [value]="homeHeaderMetadataValue"></ds-markdown-viewer>
+</div>
+}
+
+<ds-home-coar></ds-home-coar>
+
+@if (showDiscoverFilters) {
+<ds-configuration-search-page [sideBarWidth]="3" [showViewModes]="false" [searchEnabled]="false" [inPlaceSearch]="false"
+  [showScopeSelector]="false">
+  <ng-container searchContentTop *ngTemplateOutlet="homeContent"></ng-container>
+</ds-configuration-search-page>
+}
+@if (!showDiscoverFilters) {
+<div class="container">
+  <ng-container *ngTemplateOutlet="homeContent"></ng-container>
+</div>
+}
+<ds-suggestions-popup></ds-suggestions-popup>
+
+<ng-template #homeContent>
+  <div class="knbs-home">
+    <ds-knbs-home-sunburst-explorer></ds-knbs-home-sunburst-explorer>
+
+    <ds-knbs-home-flagship-publications></ds-knbs-home-flagship-publications>
+
+    @if (recentSubmissionspageSize > 0) {
+    <section class="knbs-recent">
+      <ds-recent-item-list></ds-recent-item-list>
+    </section>
+    }
+  </div>
+</ng-template>

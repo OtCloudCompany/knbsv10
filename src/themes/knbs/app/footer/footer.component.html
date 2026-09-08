@@ -1,0 +1,154 @@
+<footer>
+
+  @if (showTopFooter && (footerMetadataValue$ | async); as footerMetadataValue) {
+  <div class="top-footer">
+    <ds-markdown-viewer [value]="footerMetadataValue"></ds-markdown-viewer>
+  </div>
+  }
+
+  <!-- Institutional footer -->
+  <div class="knbs-footer">
+    <div class="container">
+      <div class="row knbs-footer__row">
+
+        <div class="col-lg-3 col-md-6 knbs-footer__col">
+          <h2 class="knbs-footer__heading">{{ 'knbs.footer.browse.head' | translate }}</h2>
+          <ul class="knbs-footer__list">
+            <li><a routerLink="/community-list">{{ 'knbs.footer.browse.communities' | translate }}</a></li>
+            <li><a routerLink="/browse/dateissued">{{ 'knbs.footer.browse.dateissued' | translate }}</a></li>
+            <li><a routerLink="/browse/author">{{ 'knbs.footer.browse.author' | translate }}</a></li>
+            <li><a routerLink="/browse/subject">{{ 'knbs.footer.browse.subject' | translate }}</a></li>
+            <li><a routerLink="/search">{{ 'knbs.footer.browse.search' | translate }}</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-6 knbs-footer__col">
+          <h2 class="knbs-footer__heading">{{ 'knbs.footer.contact.head' | translate }}</h2>
+          <address class="knbs-footer__address">
+            <strong>{{ 'knbs.footer.contact.institution' | translate }}</strong><br>
+            {{ 'knbs.footer.contact.building' | translate }}<br>
+            {{ 'knbs.footer.contact.street' | translate }}<br>
+            {{ 'knbs.footer.contact.city' | translate }}
+          </address>
+          <ul class="knbs-footer__list">
+            <li>
+              <a href="mailto:{{ 'knbs.footer.contact.email' | translate }}">
+                {{ 'knbs.footer.contact.email' | translate }}
+              </a>
+            </li>
+            <li><a href="https://www.knbs.or.ke" rel="noopener">{{ 'knbs.footer.contact.website' | translate }}</a></li>
+            @if (showSendFeedback$ | async) {
+            <li><a routerLink="info/feedback">{{ 'footer.link.feedback' | translate }}</a></li>
+            }
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-6 knbs-footer__col">
+          <h2 class="knbs-footer__heading">{{ 'knbs.footer.licence.head' | translate }}</h2>
+          <p class="knbs-footer__text">{{ 'knbs.footer.licence.body' | translate }}</p>
+          <a class="knbs-footer__licence" href="https://creativecommons.org/licenses/by/4.0/" rel="license noopener">
+            <i class="fab fa-creative-commons" aria-hidden="true"></i>
+            <i class="fab fa-creative-commons-by" aria-hidden="true"></i>
+            <span>{{ 'knbs.footer.licence.cc' | translate }}</span>
+          </a>
+          <ul class="knbs-footer__list">
+            @if (showEndUserAgreement) {
+            <li><a routerLink="info/end-user-agreement">{{ 'footer.link.end-user-agreement' | translate }}</a></li>
+            }
+            @if (showPrivacyPolicy) {
+            <li><a routerLink="info/privacy">{{ 'footer.link.privacy-policy' | translate }}</a></li>
+            }
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-6 knbs-footer__col">
+          <h2 class="knbs-footer__heading">{{ 'knbs.footer.services.head' | translate }}</h2>
+          <ul class="knbs-footer__list">
+            <li><a [href]="restApiUrl" rel="noopener">{{ 'knbs.footer.dev.rest' | translate }}</a></li>
+            <li><a [href]="oaiPmhUrl" rel="noopener">{{ 'knbs.footer.dev.oai' | translate }}</a></li>
+            @if (coarLdnEnabled$ | async) {
+            <li><a routerLink="info/coar-notify-support">{{ 'footer.link.coar-notify-support' | translate }}</a></li>
+            }
+            <li><a routerLink="info/accessibility">{{ 'footer.link.accessibility' | translate }}</a></li>
+            @if (showCookieSettings) {
+            <li>
+              <button class="knbs-footer__button" type="button" (click)="openCookieSettings()">
+                {{ 'footer.link.cookies' | translate }}
+              </button>
+            </li>
+            }
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Developer bar: machine readable entry points into the repository -->
+  <div class="knbs-devbar">
+    <div class="container knbs-devbar__inner">
+      <div class="knbs-devbar__intro">
+        <p class="knbs-devbar__title">
+          <i class="fas fa-code" aria-hidden="true"></i>
+          {{ 'knbs.footer.dev.title' | translate }}
+        </p>
+        <p class="knbs-devbar__lead">{{ 'knbs.footer.dev.lead' | translate }}</p>
+      </div>
+
+      <ul class="knbs-devbar__endpoints">
+        <li>
+          <a [href]="restApiUrl" rel="noopener" target="_blank">
+            <span class="knbs-devbar__label">{{ 'knbs.footer.dev.rest' | translate }}</span>
+            <span class="knbs-devbar__url">{{ restApiUrl }}</span>
+          </a>
+        </li>
+        <li>
+          <a [href]="oaiPmhUrl" rel="noopener" target="_blank">
+            <span class="knbs-devbar__label">{{ 'knbs.footer.dev.oai' | translate }}</span>
+            <span class="knbs-devbar__url">{{ restBaseUrl }}/oai/request</span>
+          </a>
+        </li>
+        <li>
+          <a [href]="openaireOaiUrl" rel="noopener">
+            <span class="knbs-devbar__label">{{ 'knbs.footer.dev.openaire' | translate }}</span>
+            <span class="knbs-devbar__url">{{ restBaseUrl }}/oai/openaire</span>
+          </a>
+        </li>
+        <li>
+          <a [href]="openSearchUrl" rel="noopener">
+            <span class="knbs-devbar__label">{{ 'knbs.footer.dev.opensearch' | translate }}</span>
+            <span class="knbs-devbar__url">{{ restBaseUrl }}/opensearch/search</span>
+          </a>
+        </li>
+        @if (coarLdnEnabled$ | async) {
+        <li>
+          <a [href]="ldnInboxUrl" rel="noopener">
+            <span class="knbs-devbar__label">{{ 'knbs.footer.dev.ldn' | translate }}</span>
+            <span class="knbs-devbar__url">{{ ldnInboxUrl }}</span>
+          </a>
+        </li>
+        }
+      </ul>
+    </div>
+  </div>
+
+  <!-- Copyright -->
+  <div class="bottom-footer">
+    <div class="container knbs-bottom">
+      <p class="knbs-bottom__copyright">
+        &copy; {{ dateObj | date:'y' }}, {{ 'knbs.footer.contact.institution' | translate }}.
+      </p>
+      <p class="knbs-bottom__dspace">
+        Powered by <a href="https://www.dspace.org/" rel="noopener" target="_blank">
+          {{ 'footer.link.dspace' | translate }}
+        </a>
+      </p>
+      @if (coarLdnEnabled$ | async) {
+      <a class="knbs-bottom__coar" routerLink="info/coar-notify-support">
+        <img class="n-coar" src="assets/images/n-coar.svg" [attr.alt]="'menu.header.image.logo' | translate" />
+        {{ 'footer.link.coar-notify-support' | translate }}
+      </a>
+      }
+    </div>
+  </div>
+</footer>

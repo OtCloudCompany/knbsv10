@@ -1,0 +1,58 @@
+<section class="knbs-flagship" id="flagship-publications">
+  <header class="knbs-flagship__intro">
+    <p class="knbs-eyebrow">{{ 'knbs.flagship.eyebrow' | translate }}</p>
+    <h2 class="knbs-flagship__title">{{ 'knbs.flagship.title' | translate }}</h2>
+    <p class="knbs-flagship__lead">{{ 'knbs.flagship.lead' | translate }}</p>
+  </header>
+
+  @if (publications$ | async; as publications) {
+    <div class="knbs-flagship__grid">
+      @for (publication of publications; track publication.config.key) {
+        <article class="knbs-card">
+          <p class="knbs-card__date">{{ publication.date }}</p>
+
+          <h3 class="knbs-card__title">
+            @if (publication.itemRoute) {
+              <a [routerLink]="publication.itemRoute">{{ publication.title }}</a>
+            } @else {
+              {{ publication.title }}
+            }
+          </h3>
+
+          <p class="knbs-card__description">{{ publication.description }}</p>
+
+          @if (publication.handleUri) {
+            <a class="knbs-card__handle" [href]="publication.handleUri" rel="bookmark">
+              <i class="fas fa-link" aria-hidden="true"></i>
+              <span class="knbs-card__handle-text">{{ publication.handleUri }}</span>
+            </a>
+          }
+
+          <div class="knbs-card__downloads">
+            @for (download of publication.downloads; track download.route) {
+              <a class="knbs-download" [routerLink]="download.route"
+                 [attr.data-format]="download.extension"
+                 [title]="download.name"
+                 [attr.aria-label]="'knbs.flagship.download.aria' | translate:{ format: download.label, title: publication.title }">
+                <i class="fas fa-download" aria-hidden="true"></i>
+                <span class="knbs-download__format">{{ download.label }}</span>
+                <span class="knbs-download__size">{{ download.sizeBytes | dsFileSize }}</span>
+              </a>
+            } @empty {
+              <a class="knbs-card__search" routerLink="/search"
+                 [queryParams]="{ query: publication.config.searchQuery }">
+                {{ 'knbs.flagship.search' | translate }} <span aria-hidden="true">&rarr;</span>
+              </a>
+            }
+          </div>
+        </article>
+      }
+    </div>
+  } @else {
+    <div class="knbs-flagship__grid" aria-hidden="true">
+      @for (placeholder of [1, 2, 3, 4]; track placeholder) {
+        <div class="knbs-card knbs-card--skeleton"></div>
+      }
+    </div>
+  }
+</section>

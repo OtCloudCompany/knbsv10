@@ -1,0 +1,206 @@
+:host {
+  display: block;
+}
+
+.knbs-flagship {
+  margin-bottom: var(--knbs-section-gap);
+}
+
+.knbs-eyebrow {
+  margin: 0 0 .25rem;
+  font-family: var(--knbs-mono-font);
+  font-size: .75rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--knbs-brown);
+}
+
+.knbs-flagship__title {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--knbs-ink);
+}
+
+.knbs-flagship__lead {
+  margin: .35rem 0 1.25rem;
+  max-width: 65ch;
+  color: var(--knbs-ink-muted);
+}
+
+.knbs-flagship__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.knbs-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem;
+  background: var(--knbs-surface);
+  border: 1px solid var(--knbs-gray);
+  border-top: 4px solid var(--knbs-brown);
+  border-radius: var(--knbs-radius);
+  box-shadow: var(--knbs-shadow);
+  transition: box-shadow .2s ease, transform .2s ease;
+
+  &:hover {
+    box-shadow: var(--knbs-shadow-hover);
+    transform: translateY(-2px);
+  }
+}
+
+.knbs-card--skeleton {
+  min-height: 260px;
+  background: linear-gradient(180deg, var(--knbs-light-brown), var(--knbs-surface));
+  border-top-color: var(--knbs-gray);
+  box-shadow: none;
+}
+
+.knbs-card__date {
+  margin: 0 0 .5rem;
+  font-family: var(--knbs-mono-font);
+  font-size: .75rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--knbs-gold);
+}
+
+.knbs-card__title {
+  margin: 0 0 .5rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--knbs-ink);
+
+  a {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--knbs-brown-dark);
+      text-decoration: underline;
+    }
+  }
+}
+
+.knbs-card__description {
+  flex: 1 1 auto;
+  margin: 0 0 .75rem;
+  font-size: .875rem;
+  line-height: 1.5;
+  color: var(--knbs-ink-muted);
+  // Abstracts vary from two lines to several screens; clamp them so the four cards stay comparable
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 7;
+  line-clamp: 7;
+  overflow: hidden;
+}
+
+.knbs-card__handle {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  margin-bottom: .75rem;
+  padding-bottom: .75rem;
+  border-bottom: 1px solid var(--knbs-gray);
+  font-family: var(--knbs-mono-font);
+  font-size: .6875rem;
+  color: var(--knbs-ink-muted);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--knbs-brown-dark);
+  }
+}
+
+.knbs-card__handle-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.knbs-card__downloads {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+
+.knbs-download {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .35rem;
+  padding: .3rem .6rem;
+  border: 1px solid var(--knbs-gray);
+  border-radius: var(--knbs-radius-sm);
+  background: var(--knbs-light-brown);
+  color: var(--knbs-brown-dark);
+  font-size: .75rem;
+  text-decoration: none;
+
+  i {
+    font-size: .6875rem;
+  }
+
+  &:hover,
+  &:focus-visible {
+    background: var(--knbs-brown);
+    border-color: var(--knbs-brown);
+    color: #fff;
+  }
+
+  // Open data formats get the open access green, so machine readable releases stand out from PDFs
+  &[data-format='csv'],
+  &[data-format='geojson'],
+  &[data-format='json'],
+  &[data-format='xlsx'],
+  &[data-format='xls'] {
+    background: rgba(11, 128, 75, .1);
+    border-color: rgba(11, 128, 75, .25);
+    color: var(--knbs-open-access);
+
+    &:hover,
+    &:focus-visible {
+      background: var(--knbs-open-access);
+      border-color: var(--knbs-open-access);
+      color: #fff;
+    }
+  }
+}
+
+.knbs-download__format {
+  font-family: var(--knbs-mono-font);
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+
+.knbs-download__size {
+  font-size: .6875rem;
+  opacity: .75;
+}
+
+.knbs-card__search {
+  font-size: .8125rem;
+  font-weight: 600;
+  color: var(--knbs-brown-dark);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+@include media-breakpoint-down(xl) {
+  .knbs-flagship__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .knbs-flagship__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -1,0 +1,52 @@
+// DSpace works with CSS variables for its own components, and has a mapping of all bootstrap Sass
+// variables to CSS equivalents (see src/styles/_bootstrap_variables_mapping.scss). However Bootstrap
+// still uses Sass variables internally. So if you want to override bootstrap (or other sass
+// variables) you can do so here. Their CSS counterparts will include the changes you make here
+
+/*** KNBS BRAND PALETTE ***/
+// Single source of truth for the KNBS brand. The CSS custom properties in
+// _theme_css_variable_overrides.scss are derived from these, because component
+// stylesheets are compiled separately and can only see base Sass variables.
+$knbs-brown: #b06443 !default;          // Primary brand colour
+$knbs-brown-dark: #8d4f35 !default;     // Hover / active state
+$knbs-light-brown: #f7efec !default;    // Primary surface / tint
+$knbs-gray: #e9ecef !default;           // Neutral gray / dividers
+$knbs-ink: #1e293b !default;            // High-contrast text
+$knbs-gold: #eaa023 !default;           // Accent
+$knbs-gold-dark: #c9861a !default;      // Accent hover / active
+$knbs-ink-deep: #101d33 !default;       // Deepest navy, used for the hero gradient
+$knbs-open-access: #0b804b !default;    // Open access / success
+
+/*** SEMANTIC COLOR SCHEME ***/
+$primary: $knbs-brown !default;
+$secondary: $knbs-ink !default;
+$success: $knbs-open-access !default;
+$warning: $knbs-gold !default;
+$light: $knbs-light-brown !default;
+$dark: $knbs-ink !default;
+
+$body-color: $knbs-ink !default;
+$link-color: $knbs-brown-dark !default;
+$link-hover-color: darken($knbs-brown-dark, 12%) !default;
+
+/*** TYPOGRAPHY ***/
+$font-family-monospace: 'JetBrains Mono', 'Roboto Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace !default;
+
+/*** DSPACE CHROME ***/
+// The main navigation sits inside the white header row (see themes/knbs/app/header), so it has no
+// band of its own: it inherits the header background and marks hover/active state with a gold rule.
+$ds-header-bg: #ffffff !default;
+$ds-navbar-bg: transparent !default;
+$ds-navbar-link-color: $knbs-ink !default;
+$ds-navbar-link-color-hover: $knbs-brown-dark !default;
+$ds-expandable-navbar-bg: #ffffff !default;
+$ds-header-navbar-border-bottom-color: $knbs-gray !default;
+
+// Add new semantic colors here (you don't need to add existing semantic colors)
+@import '../../../styles/_variables.scss';
+$theme-custom-semantic-colors: (
+  'knbs-brown': $knbs-brown,
+  'knbs-gold': $knbs-gold,
+  'open-access': $knbs-open-access,
+);
+$theme-colors: map-merge($theme-colors, $theme-custom-semantic-colors);
