@@ -114,7 +114,8 @@
 // and simply disappears. The padding is applied in every mode so switching does not shift layout.
 .knbs-brand__mark {
   flex: 0 0 auto;
-  max-height: var(--ds-header-logo-height);
+  // max-height: var(--ds-header-logo-height);
+  max-height: 65px !important;
   max-width: 100%;
   padding: .25rem .5rem;
   background: var(--knbs-logo-plate);

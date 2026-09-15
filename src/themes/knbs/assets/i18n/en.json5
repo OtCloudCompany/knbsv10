@@ -324,6 +324,10 @@
   "item.page.views": "Views",
   "item.page.city": "City",
   "item.page.bibliographicManagers": "Bibliographic Managers",
+  "item.page.dashboard": "Dashboard",
+  "item.page.popular-version": "Popular Version",
+  "item.page.factsnfigures": "Facts & Figures",
+
 
   "item.page.downloadsByMonth": "Downloads by Month",
 
