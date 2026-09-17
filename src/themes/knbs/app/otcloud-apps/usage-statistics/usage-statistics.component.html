@@ -22,7 +22,7 @@
     </ul>
     <div class="mt-2">
         <div *ngIf="activeTab === 1" role="tabpanel">
-            <div class="bg-light p-2">
+            <div class="bg-light p-2" *ngIf="isBrowser">
                 <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions"
                     style="width: 100%; height: 400px; display: block;">
                 </highcharts-chart>
@@ -46,7 +46,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="bg-light p-2">
+                <div class="bg-light p-2" *ngIf="isBrowser">
                     <highcharts-chart [Highcharts]="Highcharts" [constructorType]="'mapChart'"
                         [options]="mapChartOptions" style="width: 100%; height: 400px; display: block;">
                     </highcharts-chart>
@@ -72,7 +72,7 @@
                     </table>
                 </div><!-- .table-responsive -->
                 <div class="bg-light p-2">
-                    <div class="bg-light p-2">
+                    <div class="bg-light p-2" *ngIf="isBrowser">
                         <highcharts-chart [Highcharts]="Highcharts" [options]="citiesBarGraphOptions"
                             style="width: 100%; height: 400px; display: block;">
                         </highcharts-chart>

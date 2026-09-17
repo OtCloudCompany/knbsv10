@@ -72,7 +72,7 @@
       </div>
     </div>
 
-    @if (chartOptions) {
+    @if (chartOptions && isBrowser) {
       <div class="card mb-4">
         <div class="card-header">{{ 'otcloud.usage-dashboard.over-time' | translate }}</div>
         <div class="card-body">

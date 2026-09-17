@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import {
   HttpClient,
   HttpParams,
@@ -10,6 +10,7 @@ import {
   Input,
   OnDestroy,
   OnInit,
+  PLATFORM_ID,
 } from '@angular/core';
 import {
   FormControl,
@@ -90,6 +91,12 @@ export class UsageDashboardComponent implements OnInit, OnDestroy {
 
   Highcharts: any;
   chartOptions: any;
+  /**
+   * Highcharts renders into a real SVG layout, which the SSR DOM emulation cannot support. Building
+   * a chart there leaves it half-initialized and it throws on the ngOnDestroy that ends the SSR
+   * request, so the `<highcharts-chart>` element is only ever rendered in the browser.
+   */
+  isBrowser: boolean;
 
   dashboard: DashboardResponse | null = null;
   resolvedUuid: string | null = null;
@@ -121,6 +128,7 @@ export class UsageDashboardComponent implements OnInit, OnDestroy {
     private highchartsService: HighchartsService,
     private translateService: TranslateService,
     @Inject(APP_CONFIG) protected appConfig: AppConfig,
+    @Inject(PLATFORM_ID) private platformId: Object,
   ) { }
 
   private regionDisplayNames: any;
@@ -152,6 +160,7 @@ export class UsageDashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.isBrowser = isPlatformBrowser(this.platformId);
     this.Highcharts = this.highchartsService.getHighcharts();
 
     this.routeSub = this.route.params.subscribe((params) => {

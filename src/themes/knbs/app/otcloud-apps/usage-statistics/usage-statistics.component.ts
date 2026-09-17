@@ -4,8 +4,9 @@ import {
   Inject,
   Input,
   OnInit,
+  PLATFORM_ID,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import worldMap from '@highcharts/map-collection/custom/world.geo.json';
 import { TranslateModule } from '@ngx-translate/core';
 import { UsageReport } from 'src/app/core/statistics/models/usage-report.model';
@@ -28,6 +29,12 @@ import { HighchartsChartModule } from 'highcharts-angular';
 export class UsageStatisticsComponent implements OnInit {
   @Input() object: Item;
   Highcharts: any;
+  /**
+   * Highcharts renders into a real SVG layout, which the SSR DOM emulation cannot support. Building
+   * a chart there leaves it half-initialized and it throws on the ngOnDestroy that ends the SSR
+   * request, so the `<highcharts-chart>` elements are only ever rendered in the browser.
+   */
+  isBrowser: boolean;
   topCountries: UsageReport;
   topCities: UsageReport;
   countriesMapData = [];
@@ -52,10 +59,12 @@ export class UsageStatisticsComponent implements OnInit {
     protected router: Router,
     protected usageReportDataService: UsageReportDataService,
     private cd: ChangeDetectorRef,
-    @Inject(APP_CONFIG) protected appConfig: AppConfig) {
+    @Inject(APP_CONFIG) protected appConfig: AppConfig,
+    @Inject(PLATFORM_ID) private platformId: Object) {
   }
 
   ngOnInit() {
+    this.isBrowser = isPlatformBrowser(this.platformId);
     this.Highcharts = this.highchartsService.getHighcharts();
 
     const report = this.usageReportDataService
