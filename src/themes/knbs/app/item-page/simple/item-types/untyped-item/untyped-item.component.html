@@ -28,7 +28,7 @@
         <ds-generic-item-page-field [item]="object" [fields]="['dc.description']" [label]="'item.page.description'">
         </ds-generic-item-page-field>
 
-        <ds-generic-item-page-field [item]="object" [fields]="['dc.subject']" [separator]="', '"
+        <ds-generic-item-page-field class="keyword-pills" [item]="object" [fields]="['dc.subject']" [separator]="', '"
             [label]="'item.page.subject'">
         </ds-generic-item-page-field>
         @if (geospatialItemPageFieldsEnabled) {
@@ -73,6 +73,22 @@
         @if (showDownloadLinkAsAttachment !== true) {
         <ds-item-page-file-section [item]="object"></ds-item-page-file-section>
         }
+        @if (anyRelatedEntitiesHaveItems$ | async) {
+        <div class="card my-3" id="related-entities-shortcuts">
+            <div class="card-header">
+                <h5 class="card-title">Related Entities</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                @for (tab of relatedEntityTabs; track tab.id) {
+                @if (tab.hasItems$ | async) {
+                <li class="list-group-item" role="button" (click)="scrollToRelatedEntities(tab.id)">
+                    {{ tab.labelKey | translate }}
+                </li>
+                }
+                }
+            </ul>
+        </div>
+        }
         <ds-item-page-date-field [item]="object"></ds-item-page-date-field>
         <ds-metadata-representation-list class="ds-item-page-mixed-author-field" [parentItem]="object"
             [itemType]="'Person'" [metadataFields]="['dc.contributor.author', 'dc.creator']"
@@ -94,4 +110,22 @@
         </div>
     </div>
 
+    <div class="mt-5 w-100 px-0" id="related-entities">
+        @if (anyRelatedEntitiesHaveItems$ | async) {
+        <ul ngbNav #relatedTabs="ngbNav" [(activeId)]="activeRelatedTab" [destroyOnHide]="true" class="nav-tabs"
+            role="tablist">
+            @for (tab of relatedEntityTabs; track tab.id) {
+            @if (tab.hasItems$ | async) {
+            <li [ngbNavItem]="tab.id" role="presentation">
+                <a ngbNavLink role="tab">{{ tab.labelKey | translate }}</a>
+                <ng-template ngbNavContent>
+                    <ds-related-items [parentItem]="object" [relationType]="tab.relationType"></ds-related-items>
+                </ng-template>
+            </li>
+            }
+            }
+        </ul>
+        <div class="mt-4" [ngbNavOutlet]="relatedTabs"></div>
+        }
+    </div>
 </div>

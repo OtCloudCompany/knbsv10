@@ -18,17 +18,12 @@ import { ErrorComponent } from '../../../../../app/shared/error/error.component'
 import { ThemedLoadingComponent } from '../../../../../app/shared/loading/themed-loading.component';
 import { ListableObjectComponentLoaderComponent } from '../../../../../app/shared/object-collection/shared/listable-object/listable-object-component-loader.component';
 import { VarDirective } from '../../../../../app/shared/utils/var.directive';
-import { UsageStatisticsComponent } from '../../otcloud-apps/usage-statistics/usage-statistics.component';
-import { CitationGeneratorComponent } from '../../otcloud-apps/citation-generator/citation-generator.component';
-import { ItemPageNavbarComponent } from '../../otcloud-apps/item-page-navbar/item-page-navbar.component';
-import { OtcloudAbstractFieldComponent } from '../../otcloud-apps/otcloud-abstract-field/otcloud-abstract-field.component';
-import { OtcloudDescriptionFieldComponent } from '../../otcloud-apps/otcloud-description-field/otcloud-description-field.component';
-import { UsageMetricsComponent } from '../../otcloud-apps/usage-metrics/usage-metrics.component';
 
 @Component({
   selector: 'ds-themed-item-page',
   styleUrls: ['../../../../../app/item-page/simple/item-page.component.scss'],
-  templateUrl: '../../../../../app/item-page/simple/item-page.component.html',
+  // templateUrl: '../../../../../app/item-page/simple/item-page.component.html',
+  templateUrl: './item-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInOut],
   imports: [

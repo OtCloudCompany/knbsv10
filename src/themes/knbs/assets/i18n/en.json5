@@ -4,11 +4,36 @@
   //     npm run merge-i18n -- -s src/themes/knbs/assets/i18n
   // to push the changes back into the language packs. Note that the merge script rewrites the
   // destination files with JSON5.stringify, which strips their comments.
+  
+  // Report-family relationships (KDHS 2022 and similar multi-part publications)
+  // Shown on the parent report:
+  "relationships.Publication.isVolumeOfReport.Publication": "Volumes",
+  "relationships.Publication.isKeyIndicatorReportOfReport.Publication": "Key Indicator Reports",
+"relationships.Publication.isReportOfVolume.Publication": "Volume of",
+"relationships.Publication.isReportOfKeyIndicatorReport.Publication": "Key Indicators Report of",
+"relationships.FactSheet.isReportOfFactSheet.Publication": "Fact Sheet of",
+"relationships.EconomicSurvey.isAuthorOfEconomicSurvey.Person": "Is Author of",
+// Shown on the Economic Survey item:
+"relationships.EconomicSurvey.isAuthorOfEconomicSurvey.Person": "Authors",
+"relationships.EconomicSurvey.isDatasetOfEconomicSurvey.Dataset": "Datasets",
+"factsheet.search.results.head": "Fact Sheets",
+"factsheet.listelement.badge": "Fact Sheet",
+"factsheet.page.titleprefix": "Fact Sheets",
+"factsheet.page.head": "Fact Sheet",
 
-  "statisticalreport.listelement.badge": "Statistical Report",
+// Tab labels for the tabbed related-entities search on the parent report:
+"item.page.relationships.isFactSheetOfReport": "Fact Sheets",
+"item.page.relationships.isVolumeOfReport": "Volumes",
+"item.page.relationships.isKeyIndicatorReportOfReport": "Key Indicator Reports",
+
+// Reverse side — shown on the Person and Dataset items:
+"relationships.Person.isEconomicSurveyOfAuthor.EconomicSurvey": "Economic Surveys",
+"relationships.Dataset.isEconomicSurveyOfDataset.EconomicSurvey": "Economic Survey",
+"relationships.Publication.isFactSheetOfReport.FactSheet":"Fact Sheets",
+"statisticalreport.listelement.badge": "Statistical Report",
 
   // DSpace default: "All Domains"
-  "menu.section.browse_global": "Browse the repository",
+  "menu.section.browse_global": "Browse the Repository",
 
   // DSpace default: "DSpace Angular :: "
   "repository.title.prefix": "National Statistical Repository :: ",
@@ -4040,7 +4065,7 @@
 
   "menu.section.browse_community_by_title": "By Title",
 
-  "menu.section.browse_global": "Browse the repository",
+  "menu.section.browse_global": "Browse the Repository",
 
   "menu.section.browse_global_by_author": "By Author",
 
@@ -4802,7 +4827,7 @@
 
   "publication.page.options": "Options",
 
-  "publication.page.titleprefix": "Publication: ",
+  "publication.page.titleprefix": "Publication ",
 
   "publication.page.volume-title": "Volume Title",
 

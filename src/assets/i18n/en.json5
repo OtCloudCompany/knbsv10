@@ -3696,7 +3696,7 @@
 
   "menu.section.browse_community_by_title": "By Title",
 
-  "menu.section.browse_global": "Browse the repository",
+  "menu.section.browse_global": "Browse the Repository",
 
   "menu.section.browse_global_by_author": "By Author",
 
@@ -4458,7 +4458,7 @@
 
   "publication.page.options": "Options",
 
-  "publication.page.titleprefix": "Publication: ",
+  "publication.page.titleprefix": "Publication ",
 
   "publication.page.volume-title": "Volume Title",
 
@@ -8231,4 +8231,38 @@
   "item.page.factsnfigures": "Facts & Figures",
 
   "item.page.popular-version": "Popular Version",
+
+  "relationships.Publication.isVolumeOfReport.Publication": "Volumes",
+
+  "relationships.Publication.isKeyIndicatorReportOfReport.Publication": "Key Indicator Reports",
+
+  "relationships.Publication.isFactSheetOfReport.FactSheet": "Fact Sheets",
+
+  "relationships.Publication.isReportOfVolume.Publication": "Volume of",
+
+  "relationships.Publication.isReportOfKeyIndicatorReport.Publication": "Key Indicators Report of",
+
+  "relationships.FactSheet.isReportOfFactSheet.Publication": "Fact Sheet of",
+
+  "relationships.EconomicSurvey.isAuthorOfEconomicSurvey.Person": "Authors",
+
+  "relationships.EconomicSurvey.isDatasetOfEconomicSurvey.Dataset": "Datasets",
+
+  "relationships.Person.isEconomicSurveyOfAuthor.EconomicSurvey": "Economic Surveys",
+
+  "relationships.Dataset.isEconomicSurveyOfDataset.EconomicSurvey": "Economic Survey",
+
+  "factsheet.search.results.head": "Fact Sheets",
+
+  "factsheet.listelement.badge": "Fact Sheet",
+
+  "factsheet.page.titleprefix": "Fact Sheets",
+
+  "factsheet.page.head": "Fact Sheet",
+
+  "item.page.relationships.isFactSheetOfReport": "Fact Sheets",
+
+  "item.page.relationships.isVolumeOfReport": "Volumes",
+
+  "item.page.relationships.isKeyIndicatorReportOfReport": "Key Indicator Reports",
 }

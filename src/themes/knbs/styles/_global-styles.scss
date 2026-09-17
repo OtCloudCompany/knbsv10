@@ -32,6 +32,10 @@
     background-color: var(--knbs-gray);
 }
 
+.bg-info {
+    background-color: var(--knbs-brown) !important;
+}
+
 .text-knbs-brown {
     color: var(--knbs-brown);
 }
@@ -123,4 +127,72 @@ li.breadcrumb-item a {
 
 #bibliographicManagers .nav-link img {
     max-height: 25px !important;
+}
+
+/* Keywords field (dc.subject): each value as a Bootstrap-style pill instead of a
+   comma-separated line. Scoped to .keyword-pills so it only affects that field —
+   ds-metadata-values/ds-generic-item-page-field are shared by every other metadata
+   field on the item page and must not be touched. */
+.keyword-pills .simple-view-element-body {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.keyword-pills .simple-view-element-body .separator {
+    display: none;
+}
+
+.keyword-pills .ds-search-link,
+.keyword-pills .dont-break-out {
+    display: inline-block;
+    padding: 0.35em 0.75em;
+    font-size: 0.85em;
+    font-weight: 600;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 50rem;
+    background-color: var(--knbs-brown);
+    color: var(--knbs-on-brown);
+    text-decoration: none;
+}
+
+.keyword-pills a.ds-search-link:hover,
+.keyword-pills a.ds-search-link:focus {
+    background-color: var(--knbs-light-brown);
+    color: var(--knbs-on-brown);
+    text-decoration: none;
+}
+
+/* Search/discover sidebar filters: a light shadow to lift each filter card off the
+   page background, using the same --knbs-shadow token as the nav dropdown above. */
+.facet-filter {
+    box-shadow: var(--knbs-shadow);
+}
+
+/* Search results page only: the search form + filters sidebar sit right against the
+   breadcrumb bar with no gap above them. Scoped to ds-themed-search-page (the selector
+   of the routed /search page component, which only ever appears in the DOM on that
+   route) so other pages that also render a search form/sidebar — collection/community
+   browse, mydspace — are left untouched. Same fix/magnitude as .item-page's top padding
+   above, for the same breadcrumb-touching issue. */
+ds-themed-search-page {
+    display: block;
+    padding-top: 20px;
+}
+
+/* Community and collection pages: same breadcrumb-touching issue as the search
+   results page above, same fix. Each selector is a routed page component that only
+   ever appears in the DOM on its own route. */
+ds-themed-community-page,
+ds-themed-collection-page {
+    display: block;
+    padding-top: 20px;
+}
+
+.setting-option {
+    box-shadow: var(--knbs-shadow) !important;
 }

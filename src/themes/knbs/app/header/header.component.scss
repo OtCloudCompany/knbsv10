@@ -6,8 +6,9 @@
 
 .knbs-topbar {
   background: var(--knbs-brown);
-  color: var(--knbs-topbar-fg);
+  color: var(--knbs-topbar-fg-strong);
   font-size: .8125rem;
+  text-transform: uppercase;
 }
 
 .knbs-topbar__inner {
@@ -46,6 +47,7 @@
 .knbs-topbar__state {
   font-weight: 700;
   color: var(--knbs-topbar-fg-strong);
+  text-transform: uppercase;
 }
 
 .knbs-topbar__sep {
@@ -59,7 +61,7 @@
   gap: .25rem 1.25rem;
 
   a {
-    color: var(--knbs-topbar-fg);
+    color: #fff;
     text-decoration: none;
 
     &:hover,
