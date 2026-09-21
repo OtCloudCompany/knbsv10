@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE relationships SYSTEM "relationship-types.dtd">
+
+<relationships>
+
+	<!-- Sample relationship types setup used for the entities development
+	 This file can be imported using the initialize-entities launcher -->
+    <type>
+        <leftType>Publication</leftType>
+        <rightType>Person</rightType>
+        <leftwardType>isAuthorOfPublication</leftwardType>
+        <rightwardType>isPublicationOfAuthor</rightwardType>
+        <leftCardinality>
+            <min>0</min>
+        </leftCardinality>
+        <rightCardinality>
+            <min>0</min>
+        </rightCardinality>
+        <copyToLeft>true</copyToLeft>
+    </type>
+    <type>
+        <leftType>CartographicEntity</leftType>
+        <rightType>Person</rightType>
+        <leftwardType>isAuthorOfCartographicEntity</leftwardType>
+        <rightwardType>isCartographicEntityOfAuthor</rightwardType>
+        <leftCardinality>
+            <min>0</min>
+        </leftCardinality>
+        <rightCardinality>
+            <min>0</min>
+        </rightCardinality>
+        <copyToLeft>true</copyToLeft>
+    </type>
+    <type>
+        <leftType>AuditReport</leftType>
+        <rightType>Person</rightType>
+        <leftwardType>isAuthorOfAuditReport</leftwardType>
+        <rightwardType>isAuditReportOfAuthor</rightwardType>
+        <leftCardinality>
+            <min>0</min>
+        </leftCardinality>
+        <rightCardinality>
+            <min>0</min>
+        </rightCardinality>
+        <copyToLeft>true</copyToLeft>
+    </type>
+
+    <type>
+        <leftType>CommunicationMaterial</leftType>
+        <rightType>Person</rightType>
+        <leftwardType>isAuthorOfCommunicationMaterial</leftwardType>
+        <rightwardType>isCommunicationMaterialOfAuthor</rightwardType>
+        <leftCardinality>
+            <min>0</min>
+        </leftCardinality>
+        <rightCardinality>
+            <min>0</min>
+        </rightCardinality>
+        <copyToLeft>true</copyToLeft>
+    </type>
+    <type>
+        <leftType>RetirementScheme</leftType>
+        <rightType>Person</rightType>
+        <leftwardType>isAuthorOfRetirementScheme</leftwardType>
+        <rightwardType>isRetirementSchemeOfAuthor</rightwardType>
+        <leftCardinality>
+            <min>0</min>
+        </leftCardinality>
+        <rightCardinality>
+            <min>0</min>
+        </rightCardinality>
+        <copyToLeft>true</copyToLeft>
+    </type>
+    <type>
+        <leftType>HRDocument</leftType>
+        <rightType>Person</rightType>
+        <leftwardType>isAuthorOfHRDocument</leftwardType>
+        <rightwardType>isHRDocumentOfAuthor</rightwardType>
+        <leftCardinality>
+            <min>0</min>
+        </leftCardinality>
+        <rightCardinality>
+            <min>0</min>
+        </rightCardinality>
+        <copyToLeft>true</copyToLeft>
+    </type>
+    <type>
+        <leftType>HRInstrument</leftType>
+        <rightType>Person</rightType>
+        <leftwardType>isAuthorOfHRInstrument</leftwardType>
+        <rightwardType>isHRInstrumentOfAuthor</rightwardType>
+        <leftCardinality>
+            <min>0</min>
+        </leftCardinality>
+        <rightCardinality>
+            <min>0</min>
+        </rightCardinality>
+        <copyToLeft>true</copyToLeft>
+    </type>
+    <type>
+        <leftType>PolicyDocument</leftType>
+        <rightType>Person</rightType>
+        <leftwardType>isAuthorOfPolicyDocument</leftwardType>
+        <rightwardType>isPolicyDocumentOfAuthor</rightwardType>
+        <leftCardinality>
+            <min>0</min>
+        </leftCardinality>
+        <rightCardinality>
+            <min>0</min>
+        </rightCardinality>
+        <copyToLeft>true</copyToLeft>
+    </type>
+    <type>
+        <leftType>Manual</leftType>
+        <rightType>Person</rightType>
+        <leftwardType>isAuthorOfManual</leftwardType>
+        <rightwardType>isManualOfAuthor</rightwardType>
+        <leftCardinality>
+            <min>0</min>
+        </leftCardinality>
+        <rightCardinality>
+            <min>0</min>
+        </rightCardinality>
+        <copyToLeft>true</copyToLeft>
+    </type>
+
+    <type>
+        <leftType>Multimedia</leftType>
+        <rightType>Person</rightType>
+        <leftwardType>isAuthorOfMultimedia</leftwardType>
+        <rightwardType>isMultimediaOfAuthor</rightwardType>
+        <leftCardinality>
+            <min>0</min>
+        </leftCardinality>
+        <rightCardinality>
+            <min>0</min>
+        </rightCardinality>
+        <copyToLeft>true</copyToLeft>
+    </type>
+
+    <type>
+        <leftType>PressRelease</leftType>
+        <rightType>Person</rightType>
+        <leftwardType>isAuthorOfPressRelease</leftwardType>
+        <rightwardType>isPressReleaseOfAuthor</rightwardType>
+        <leftCardinality>
+            <min>0</min>
+        </leftCardinality>
+        <rightCardinality>
+            <min>0</min>
+        </rightCardinality>
+        <copyToLeft>true</copyToLeft>
+    </type>
+    <type>
+        <leftType>EconomicSurvey</leftType>
+        <rightType>Person</rightType>
+        <leftwardType>isAuthorOfEconomicSurvey</leftwardType>
+        <rightwardType>isEconomicSurveyOfAuthor</rightwardType>
+        <leftCardinality>
+            <min>0</min>
+        </leftCardinality>
+        <rightCardinality>
+            <min>0</min>
+        </rightCardinality>
+        <copyToLeft>true</copyToLeft>
+    </type>
+    <type>
+        <leftType>SurveyReport</leftType>
+        <rightType>Person</rightType>
+        <leftwardType>isAuthorOfSurveyReport</leftwardType>
+        <rightwardType>isSurveyReportOfAuthor</rightwardType>
+        <leftCardinality>
+            <min>0</min>
+        </leftCardinality>
+        <rightCardinality>
+            <min>0</min>
+        </rightCardinality>
+        <copyToLeft>true</copyToLeft>
+    </type>
+    <type>
+        <leftType>StatisticalReport</leftType>
+        <rightType>Person</rightType>
+        <leftwardType>isAuthorOfStatisticalReport</leftwardType>
+        <rightwardType>isStatisticalReportOfAuthor</rightwardType>
+        <leftCardinality>
+            <min>0</min>
+        </leftCardinality>
+        <rightCardinality>
+            <min>0</min>
+        </rightCardinality>
+        <copyToLeft>true</copyToLeft>
+    </type>
+    <type>
+        <leftType>StatisticalAbstract</leftType>
+        <rightType>Person</rightType>
+        <leftwardType>isAuthorOfStatisticalAbstract</leftwardType>
+        <rightwardType>isStatisticalAbstractOfAuthor</rightwardType>
+        <leftCardinality>
+            <min>0</min>
+        </leftCardinality>
+        <rightCardinality>
+            <min>0</min>
+        </rightCardinality>
+        <copyToLeft>true</copyToLeft>
+    </type>
+    <type>
+        <leftType>StatisticalRelease</leftType>
+        <rightType>Person</rightType>
+        <leftwardType>isAuthorOfStatisticalRelease</leftwardType>
+        <rightwardType>isStatisticalReleaseOfAuthor</rightwardType>
+        <leftCardinality>
+            <min>0</min>
+        </leftCardinality>
+        <rightCardinality>
+            <min>0</min>
+        </rightCardinality>
+        <copyToLeft>true</copyToLeft>
+    </type>
+
+    <type>
+        <leftType>CensusReport</leftType>
+        <rightType>Person</rightType>
+        <leftwardType>isAuthorOfCensusReport</leftwardType>
+        <rightwardType>isCensusReportOfAuthor</rightwardType>
+        <leftCardinality>
+            <min>0</min>
+        </leftCardinality>
+        <rightCardinality>
+            <min>0</min>
+        </rightCardinality>
+        <copyToLeft>true</copyToLeft>
+    </type>
+
+    <!-- FactSheet was missing an author relation, unlike every other content
+         type in this file. -->
+    <type>
+        <leftType>FactSheet</leftType>
+        <rightType>Person</rightType>
+        <leftwardType>isAuthorOfFactSheet</leftwardType>
+        <rightwardType>isFactSheetOfAuthor</rightwardType>
+        <leftCardinality>
+            <min>0</min>
+        </leftCardinality>
+        <rightCardinality>
+            <min>0</min>
+        </rightCardinality>
+        <copyToLeft>true</copyToLeft>
+    </type>
+
+    <type>
+        <leftType>EconomicSurvey</leftType>
+        <rightType>Dataset</rightType>
+        <leftwardType>isDatasetOfEconomicSurvey</leftwardType>
+        <rightwardType>isEconomicSurveyOfDataset</rightwardType>
+        <leftCardinality>
+            <min>0</min>
+        </leftCardinality>
+        <rightCardinality>
+            <min>0</min>
+        </rightCardinality>
+        <copyToLeft>true</copyToLeft>
+    </type>
+
+    <!-- Dataset<->Person and Dataset<->Publication, kept as shipped per the note
+         below (these were missing from the file despite being documented as kept). -->
+    <type>
+        <leftType>Dataset</leftType>
+        <rightType>Person</rightType>
+        <leftwardType>isAuthorOfDataset</leftwardType>
+        <rightwardType>isDatasetOfAuthor</rightwardType>
+        <leftCardinality>
+            <min>0</min>
+        </leftCardinality>
+        <rightCardinality>
+            <min>0</min>
+        </rightCardinality>
+        <copyToLeft>true</copyToLeft>
+    </type>
+    <type>
+        <leftType>Publication</leftType>
+        <rightType>Dataset</rightType>
+        <leftwardType>isDatasetOfPublication</leftwardType>
+        <rightwardType>isPublicationOfDataset</rightwardType>
+        <leftCardinality>
+            <min>0</min>
+        </leftCardinality>
+        <rightCardinality>
+            <min>0</min>
+        </rightCardinality>
+        <copyToLeft>true</copyToLeft>
+    </type>
+
+    <type>
+        <leftType>Publication</leftType>
+        <rightType>Project</rightType>
+        <leftwardType>isProjectOfPublication</leftwardType>
+        <rightwardType>isPublicationOfProject</rightwardType>
+        <leftCardinality>
+            <min>0</min>
+        </leftCardinality>
+        <rightCardinality>
+            <min>0</min>
+        </rightCardinality>
+        <copyToLeft>true</copyToLeft>
+    </type>
+    <type>
+        <leftType>Person</leftType>
+        <rightType>Project</rightType>
+        <leftwardType>isProjectOfPerson</leftwardType>
+        <rightwardType>isPersonOfProject</rightwardType>
+        <leftCardinality>
+            <min>0</min>
+        </leftCardinality>
+        <rightCardinality>
+            <min>0</min>
+        </rightCardinality>
+    </type>
+    <!--
+        repository.knbs.or.ke relationship model.
+ 
+        Based on the DSpace default relationship-types.xml, with all
+        OrgUnit, Project, Journal, JournalVolume and JournalIssue
+        relationships removed. Publication<->Person and Dataset<->Person /
+        Dataset<->Publication relationships are kept as shipped.
+ 
+        Added: a "report family" model for multi-part statistical
+        publications such as KDHS 2022:
+          - Publication (parent report) -> Publication (volume)
+          - Publication (parent report) -> Publication (key indicators report)
+          - Publication (parent report) -> FactSheet (county / national sheet)
+ 
+        The FactSheet entity type does not exist in the default install;
+        `dspace initialize-entities -f <this file>` will create it because
+        it is referenced below.
+ 
+        Convention: the LEFT side is always the parent report. leftwardType
+        is the label shown on the LEFT item (what the linked right item is
+        to it); rightwardType is the label shown on the RIGHT item.
+    -->
+ 
+    <!-- =====================================================
+         Report-family relationships (KDHS 2022 and similar)
+         ===================================================== -->
+ 
+    <!-- Parent report -> Volume 1, Volume 2, ...
+         A report may have many volumes; a volume belongs to at most
+         one parent report (drop <max> on the right side if you would
+         rather not enforce that). -->
+    <type>
+        <leftType>Publication</leftType>
+        <rightType>Publication</rightType>
+        <leftwardType>isVolumeOfReport</leftwardType>
+        <rightwardType>isReportOfVolume</rightwardType>
+        <leftCardinality>
+            <min>0</min>
+        </leftCardinality>
+        <rightCardinality>
+            <min>0</min>
+            <max>1</max>
+        </rightCardinality>
+    </type>
+ 
+    <!-- Parent report -> Key Indicators Report -->
+    <type>
+        <leftType>Publication</leftType>
+        <rightType>Publication</rightType>
+        <leftwardType>isKeyIndicatorReportOfReport</leftwardType>
+        <rightwardType>isReportOfKeyIndicatorReport</rightwardType>
+        <leftCardinality>
+            <min>0</min>
+        </leftCardinality>
+        <rightCardinality>
+            <min>0</min>
+            <max>1</max>
+        </rightCardinality>
+    </type>
+ 
+    <!-- Parent report -> County / national fact sheets -->
+    <type>
+        <leftType>Publication</leftType>
+        <rightType>FactSheet</rightType>
+        <leftwardType>isFactSheetOfReport</leftwardType>
+        <rightwardType>isReportOfFactSheet</rightwardType>
+        <leftCardinality>
+            <min>0</min>
+        </leftCardinality>
+        <rightCardinality>
+            <min>0</min>
+            <max>1</max>
+        </rightCardinality>
+    </type>
+</relationships>

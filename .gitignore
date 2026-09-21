@@ -19,7 +19,8 @@ npm-debug.log
 *.ngfactory.ts
 *.css.shim.ts
 *.scss.shim.ts
-
+auth.json
+set_publication_entity_type.py
 .DS_Store
 
 webpack.records.json

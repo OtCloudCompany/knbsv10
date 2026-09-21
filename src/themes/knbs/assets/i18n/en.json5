@@ -173,6 +173,9 @@
   "knbs.footer.browse.subject": "By subject",
 
   "knbs.footer.browse.search": "Advanced search",
+  "knbs.footer.browse.serviceCharter": "Service Charter",
+  "knbs.footer.browse.qualityPolicy": "Quality Policy",
+  "knbs.footer.browse.advanceCalendar": "Advance Release Calendar",
 
   "knbs.footer.contact.head": "Contact",
 
@@ -2443,11 +2446,12 @@
 
   "file-section.error.header": "Error obtaining files for this item",
 
-  "footer.copyright": "copyright © 2002-{{ year }}",
+  "footer.copyright": "Copyright © {{ year }}",
 
   "footer.link.accessibility": "Accessibility settings",
 
   "footer.link.dspace": "DSpace",
+  "footer.link.knbs": "Kenya National Bureau of Statistics,",
 
   "footer.link.lyrasis": "LYRASIS",
 

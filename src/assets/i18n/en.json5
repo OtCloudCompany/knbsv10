@@ -2074,7 +2074,7 @@
 
   "file-section.error.header": "Error obtaining files for this item",
 
-  "footer.copyright": "copyright © 2002-{{ year }}",
+  "footer.copyright": "Copyright © {{ year }}",
 
   "footer.link.accessibility": "Accessibility settings",
 
@@ -8265,4 +8265,12 @@
   "item.page.relationships.isVolumeOfReport": "Volumes",
 
   "item.page.relationships.isKeyIndicatorReportOfReport": "Key Indicator Reports",
+
+  "footer.link.knbs": "Kenya National Bureau of Statistics,",
+
+  "knbs.footer.browse.serviceCharter": "Service Charter",
+
+  "knbs.footer.browse.qualityPolicy": "Quality Policy",
+
+  "knbs.footer.browse.advanceCalendar": "Advance Release Calendar",
 }

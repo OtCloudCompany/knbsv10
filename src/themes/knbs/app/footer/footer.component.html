@@ -19,6 +19,10 @@
             <li><a routerLink="/browse/author">{{ 'knbs.footer.browse.author' | translate }}</a></li>
             <li><a routerLink="/browse/subject">{{ 'knbs.footer.browse.subject' | translate }}</a></li>
             <li><a routerLink="/search">{{ 'knbs.footer.browse.search' | translate }}</a></li>
+            <li><a routerLink="//handle/knbs-ke-repo/685">{{ 'knbs.footer.browse.serviceCharter' | translate }}</a></li>
+            <li><a routerLink="//handle/knbs-ke-repo/685">{{ 'knbs.footer.browse.qualityPolicy' | translate }}</a></li>
+            <li><a routerLink="//handle/knbs-ke-repo/685">{{ 'knbs.footer.browse.advanceCalendar' | translate }}</a>
+            </li>
           </ul>
         </div>
 
@@ -37,9 +41,9 @@
               </a>
             </li>
             <li><a href="https://www.knbs.or.ke" rel="noopener">{{ 'knbs.footer.contact.website' | translate }}</a></li>
-            @if (showSendFeedback$ | async) {
+            <!-- @if (showSendFeedback$ | async) {
             <li><a routerLink="info/feedback">{{ 'footer.link.feedback' | translate }}</a></li>
-            }
+            } -->
           </ul>
         </div>
 
@@ -51,14 +55,14 @@
             <i class="fab fa-creative-commons-by" aria-hidden="true"></i>
             <span>{{ 'knbs.footer.licence.cc' | translate }}</span>
           </a>
-          <ul class="knbs-footer__list">
+          <!-- <ul class="knbs-footer__list">
             @if (showEndUserAgreement) {
             <li><a routerLink="info/end-user-agreement">{{ 'footer.link.end-user-agreement' | translate }}</a></li>
             }
             @if (showPrivacyPolicy) {
             <li><a routerLink="info/privacy">{{ 'footer.link.privacy-policy' | translate }}</a></li>
             }
-          </ul>
+          </ul> -->
         </div>
 
         <div class="col-lg-3 col-md-6 knbs-footer__col">
@@ -70,13 +74,7 @@
             <li><a routerLink="info/coar-notify-support">{{ 'footer.link.coar-notify-support' | translate }}</a></li>
             }
             <li><a routerLink="info/accessibility">{{ 'footer.link.accessibility' | translate }}</a></li>
-            @if (showCookieSettings) {
-            <li>
-              <button class="knbs-footer__button" type="button" (click)="openCookieSettings()">
-                {{ 'footer.link.cookies' | translate }}
-              </button>
-            </li>
-            }
+
           </ul>
         </div>
 
@@ -85,7 +83,7 @@
   </div>
 
   <!-- Developer bar: machine readable entry points into the repository -->
-  <div class="knbs-devbar">
+  <!-- <div class="knbs-devbar">
     <div class="container knbs-devbar__inner">
       <div class="knbs-devbar__intro">
         <p class="knbs-devbar__title">
@@ -130,25 +128,50 @@
         }
       </ul>
     </div>
-  </div>
+  </div> -->
 
   <!-- Copyright -->
-  <div class="bottom-footer">
-    <div class="container knbs-bottom">
-      <p class="knbs-bottom__copyright">
-        &copy; {{ dateObj | date:'y' }}, {{ 'knbs.footer.contact.institution' | translate }}.
-      </p>
-      <p class="knbs-bottom__dspace">
-        Powered by <a href="https://www.dspace.org/" rel="noopener" target="_blank">
-          {{ 'footer.link.dspace' | translate }}
+  <div class="bottom-footer p-1 d-flex flex-column flex-md-row justify-content-center align-items-center text-white">
+    <div class="content-container align-self-center">
+      <p class="m-0 text-center">
+        <a class="text-white" href="https://www.dspace.org/" role="link" tabindex="0">
+          {{ 'footer.link.knbs' | translate }}
         </a>
+        {{ 'footer.copyright' | translate:{year: dateObj | date:'y'} }}
       </p>
-      @if (coarLdnEnabled$ | async) {
-      <a class="knbs-bottom__coar" routerLink="info/coar-notify-support">
-        <img class="n-coar" src="assets/images/n-coar.svg" [attr.alt]="'menu.header.image.logo' | translate" />
-        {{ 'footer.link.coar-notify-support' | translate }}
-      </a>
-      }
+      <ul class="footer-info list-unstyled d-flex justify-content-center mb-0">
+        @if (showCookieSettings) {
+        <li>
+          <button class="btn btn-link text-white" type="button" (click)="openCookieSettings()" role="button"
+            tabindex="0">
+            {{ 'footer.link.cookies' | translate}}
+          </button>
+        </li>
+        }
+        <li>
+          <a class="btn text-white" routerLink="info/accessibility" role="link" tabindex="0">{{
+            'footer.link.accessibility' | translate }}</a>
+        </li>
+        @if (showPrivacyPolicy) {
+        <li>
+          <a class="btn text-white" routerLink="info/privacy" role="link" tabindex="0">{{ 'footer.link.privacy-policy' |
+            translate}}</a>
+        </li>
+        }
+        @if (showEndUserAgreement) {
+        <li>
+          <a class="btn text-white" routerLink="info/end-user-agreement" role="link" tabindex="0">{{
+            'footer.link.end-user-agreement' | translate}}</a>
+        </li>
+        }
+        @if (showSendFeedback$ | async) {
+        <li>
+          <a class="btn text-white" routerLink="info/feedback" role="link" tabindex="0">{{ 'footer.link.feedback' |
+            translate}}</a>
+        </li>
+        }
+      </ul>
     </div>
   </div>
+  <!-- Copyright -->
 </footer>
