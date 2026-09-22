@@ -61,11 +61,11 @@ export class HomePageComponent extends BaseComponent {
    */
   // TODO: curate this list with the repository team once there are search logs to curate it from
   trendingSearches: string[] = [
-    'Economic Survey',
-    'Population and Housing Census',
-    'Consumer Price Index',
-    'Agriculture',
-    'County Statistical Abstract',
+    'Economic Surveys',
+    'Population and Housing Censuses',
+    'Consumer Price Indices',
+    'Agricultures',
+    'County Statistical Abstracts',
   ];
 
   /**

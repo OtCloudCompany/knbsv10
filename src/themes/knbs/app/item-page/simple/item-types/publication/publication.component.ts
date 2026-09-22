@@ -128,11 +128,11 @@ export class PublicationComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     super.ngOnInit();
     this.relatedEntityTabs = [
-      { id: 'factsheet', relationType: 'isFactSheetOfReport', labelKey: 'relationships.Publication.isFactSheetOfReport.FactSheet' },
       { id: 'volume', relationType: 'isVolumeOfReport', labelKey: 'relationships.Publication.isVolumeOfReport.Publication' },
-      { id: 'keyindicator', relationType: 'isKeyIndicatorReportOfReport', labelKey: 'relationships.Publication.isKeyIndicatorReportOfReport.Publication' },
       { id: 'reportofvolume', relationType: 'isReportOfVolume', labelKey: 'relationships.Publication.isReportOfVolume.Publication' },
+      { id: 'keyindicator', relationType: 'isKeyIndicatorReportOfReport', labelKey: 'relationships.Publication.isKeyIndicatorReportOfReport.Publication' },
       { id: 'reportofkeyindicator', relationType: 'isReportOfKeyIndicatorReport', labelKey: 'relationships.Publication.isReportOfKeyIndicatorReport.Publication' },
+      { id: 'factsheet', relationType: 'isFactSheetOfReport', labelKey: 'relationships.Publication.isFactSheetOfReport.FactSheet' },
       { id: 'project', relationType: 'isProjectOfPublication', labelKey: 'relationships.Publication.isProjectOfPublication.Project' },
       { id: 'dataset', relationType: 'isDatasetOfPublication', labelKey: 'relationships.Publication.isDatasetOfPublication.Dataset' },
     ].map((tab) => ({ ...tab, hasItems$: this.hasRelatedItems(tab.relationType) }));
