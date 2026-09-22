@@ -97,7 +97,7 @@
                 </div>
             </div>
         </div>
-        <!-- @if (anyRelatedEntitiesHaveItems$ | async) {
+        @if (anyRelatedEntitiesHaveItems$ | async) {
         <div class="card my-3" id="related-entities-shortcuts">
             <div class="card-header">
                 <h5 class="card-title">Related Entities</h5>
@@ -112,7 +112,7 @@
                 }
             </ul>
         </div>
-        } -->
+        }
         <ds-item-page-date-field [item]="object"></ds-item-page-date-field>
         <ds-metadata-representation-list class="ds-item-page-mixed-author-field" [parentItem]="object"
             [itemType]="'Person'" [metadataFields]="['dc.contributor.author', 'dc.creator']"
