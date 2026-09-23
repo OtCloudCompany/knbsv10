@@ -64,7 +64,7 @@ export class HomePageComponent extends BaseComponent {
     'Economic Surveys',
     'Population and Housing Censuses',
     'Consumer Price Indices',
-    'Agricultures',
+    'Agriculture',
     'County Statistical Abstracts',
   ];
 
