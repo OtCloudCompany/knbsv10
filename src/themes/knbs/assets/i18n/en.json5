@@ -355,7 +355,9 @@
   "item.page.dashboard": "Dashboard",
   "item.page.popular-version": "Popular Version",
   "item.page.factsnfigures": "Facts & Figures",
-
+  "home.recent-submissions.head": "Recent Publications",
+  "error.recent-submissions": "Error fetching recent publications",
+  "loading.recent-submissions": "Loading recent publications...",
 
   "item.page.downloadsByMonth": "Downloads by Month",
 

@@ -2014,7 +2014,7 @@
 
   "error.objects": "Error fetching objects",
 
-  "error.recent-submissions": "Error fetching recent submissions",
+  "error.recent-submissions": "Error fetching recent pubblications",
 
   "error.profile-groups": "Error retrieving profile groups",
 
@@ -3620,7 +3620,7 @@
 
   "loading.objects": "Loading...",
 
-  "loading.recent-submissions": "Loading recent submissions...",
+  "loading.recent-submissions": "Loading recent publications...",
 
   "loading.search-results": "Loading search results...",
 
@@ -6648,7 +6648,7 @@
 
   "person.orcid-tooltip.not-authenticated": "{{orcid}} (unconfirmed)",
 
-  "home.recent-submissions.head": "Recent Submissions",
+  "home.recent-submissions.head": "Recent Publications",
 
   "authority-confidence.search-label": "Search",
 
