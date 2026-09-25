@@ -129,6 +129,16 @@ li.breadcrumb-item a {
     max-height: 25px !important;
 }
 
+/* Item page field labels ("Authors", "Date issued", "Abstract", "Usage statistics", ...). They are
+   labels rather than section headings, so they sit at body size instead of the 20px DSpace gives
+   them. ds-metadata-field-wrapper renders them as h2, while the otcloud fields reuse the class on
+   h4 and h5; this one rule makes all of them match. !important is needed to beat the
+   view-encapsulated rule in metadata-field-wrapper.component.scss. */
+.simple-view-element-header {
+    font-size: 1rem !important;
+    font-weight: 600;
+}
+
 /* Keywords field (dc.subject): each value as a Bootstrap-style pill instead of a
    comma-separated line. Scoped to .keyword-pills so it only affects that field —
    ds-metadata-values/ds-generic-item-page-field are shared by every other metadata

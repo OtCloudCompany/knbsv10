@@ -1,84 +1,47 @@
 /**
- * A flagship national release promoted on the KNBS homepage.
+ * Configuration of the featured publications shown on the KNBS homepage.
  *
- * The four cards are curated rather than discovered, so that the homepage keeps showing the same
- * four national releases regardless of what was submitted last. Everything that is shown on a card
- * (title, description, issue date, handle URI, downloads) is read from the live item once the
- * handle resolves; the fallback* values are only used until the handle is filled in, or when the
- * item is not (yet) available.
+ * Which items appear is decided in the repository, not here: curators tag an item with
+ * `local.featured` = 'Featured' on the item edit screen, and the homepage shows the most recently
+ * issued of them. The backend exposes that metadata field through a plain DiscoverySearchFilter in
+ * discovery.xml (indexFieldName "featured"), which is what makes it queryable as `f.featured`.
  */
-export interface FlagshipPublicationConfig {
-  /**
-   * Stable key, used for translations and *ngFor tracking
-   */
-  key: string;
-
-  /**
-   * The persistent handle of the item, e.g. 'knbs-ke-repo/371'.
-   * Leave empty to render the curated fallback copy and a Discovery search link instead.
-   */
-  handle: string;
-
-  /**
-   * Shown while the handle is empty or cannot be resolved
-   */
-  fallbackTitle: string;
-  fallbackDescription: string;
-  fallbackDate: string;
-
-  /**
-   * Discovery query used by the card's fallback link when the handle cannot be resolved
-   */
-  searchQuery: string;
-}
 
 /**
- * The four national releases promoted on the homepage.
- *
- * NOTE FOR CURATORS: `handle` points at a specific item, so recurring releases have to be
- * repointed when a new edition is published (monthly for the Leading Economic Indicators, annually
- * for the Economic Survey and the Statistical Abstract). Clearing a handle is always safe: the card
- * then falls back to the curated copy below and links into a Discovery search.
+ * Discovery configuration the featured query runs against
  */
-export const KNBS_FLAGSHIP_PUBLICATIONS: FlagshipPublicationConfig[] = [
-  {
-    key: 'economic-survey',
-    handle: 'knbs-ke-repo/371',
-    fallbackTitle: 'Economic Survey',
-    fallbackDescription: 'The annual review of Kenya\'s economic performance, with national accounts, ' +
-      'production, employment, prices and public finance statistics.',
-    fallbackDate: 'Annual',
-    searchQuery: 'Economic Survey',
-  },
-  {
-    key: 'kphc-2019',
-    handle: 'knbs-ke-repo/454',
-    fallbackTitle: '2019 Kenya Population and Housing Census',
-    fallbackDescription: 'Volume reports of the 2019 census: population distribution, household ' +
-      'characteristics, and socio-economic indicators down to sub-county level.',
-    fallbackDate: '2019',
-    searchQuery: 'Kenya Population and Housing Census',
-  },
-  {
-    key: 'statistical-abstract',
-    handle: 'knbs-ke-repo/372',
-    fallbackTitle: 'Statistical Abstract',
-    fallbackDescription: 'A consolidated annual compendium of official statistics across every ' +
-      'sector of the Kenyan economy.',
-    fallbackDate: 'Annual',
-    searchQuery: 'Statistical Abstract',
-  },
-  {
-    key: 'leading-economic-indicators',
-    // Monthly release: repoint this at the newest indicator each month
-    handle: 'knbs-ke-repo/429',
-    fallbackTitle: 'Leading Economic Indicators',
-    fallbackDescription: 'Monthly short-term indicators tracking the direction of the economy: ' +
-      'trade, transport, energy, tourism and monetary aggregates.',
-    fallbackDate: 'Monthly',
-    searchQuery: 'Leading Economic Indicators',
-  },
-];
+export const KNBS_FEATURED_CONFIGURATION = 'default';
+
+/**
+ * Query parameter of the search filter: 'f.' followed by the indexFieldName from discovery.xml
+ */
+export const KNBS_FEATURED_FILTER = 'f.featured';
+
+/**
+ * The value curators tag items with, together with the filter operator.
+ *
+ * The Solr field behind `equals` is a string field, so this match is case sensitive: an item tagged
+ * 'featured' or 'FEATURED' will not show up.
+ */
+export const KNBS_FEATURED_VALUE = 'Featured,equals';
+
+/**
+ * Number of cards on the homepage. Once more than this many items are featured, the section shows
+ * a link to the full, sortable list instead of silently dropping the rest.
+ */
+export const KNBS_FEATURED_CARDS = 4;
+
+/**
+ * Newest release first. The field is part of the default configuration's sort options, so the
+ * search page offers it in its sort dropdown as well.
+ */
+export const KNBS_FEATURED_SORT_FIELD = 'dc.date.issued';
+
+/**
+ * Pagination id of the search page, which is also the prefix of its sort query parameters
+ * ('spc.sf' for the field, 'spc.sd' for the direction).
+ */
+export const KNBS_SEARCH_PAGINATION_ID = 'spc';
 
 /**
  * Bundle that direct download buttons are read from

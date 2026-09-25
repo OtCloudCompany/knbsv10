@@ -1,7 +1,5 @@
-import { FlagshipPublicationConfig } from './flagship-publications.config';
-
 /**
- * A single direct download button on a flagship publication card
+ * A single direct download button on a featured publication card
  */
 export interface FlagshipDownload {
   /**
@@ -28,28 +26,25 @@ export interface FlagshipDownload {
 }
 
 /**
- * Everything a flagship publication card renders
+ * Everything a featured publication card renders
  */
 export interface FlagshipPublicationView {
-  config: FlagshipPublicationConfig;
-
   /**
-   * False when the configured handle is empty or could not be resolved; the card then falls back
-   * to the curated title/description and links into a Discovery search.
+   * The item's UUID, used for *ngFor tracking
    */
-  resolved: boolean;
+  id: string;
 
   title: string;
   description: string;
   date: string;
 
   /**
-   * The permanent handle URI, e.g. https://hdl.handle.net/20.500.14351/1234
+   * The permanent handle URI, e.g. https://hdl.handle.net/knbs-ke-repo/371
    */
   handleUri: string;
 
   /**
-   * Route to the item page, only set when the item resolved
+   * Route to the item page
    */
   itemRoute: string;
 

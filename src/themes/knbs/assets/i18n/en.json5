@@ -138,11 +138,13 @@
 
   "knbs.flagship.title": "Key national publications",
 
-  "knbs.flagship.lead": "The recurring national releases, with their permanent handle and one-click downloads of every published format.",
+  "knbs.flagship.lead": "The recurring national releases with one-click downloads of every published format.",
 
   "knbs.flagship.download.aria": "Download {{ title }} as {{ format }}",
 
-  "knbs.flagship.search": "Find this release",
+  "knbs.flagship.viewAll": "View all featured publications",
+
+  "search.filters.applied.f.featured": "Featured",
 
   /*** Footer: developer bar ***/
 
@@ -194,9 +196,9 @@
 
   "knbs.footer.licence.head": "Open data & licensing",
 
-  "knbs.footer.licence.body": "Unless stated otherwise on the item itself, content in this repository is published as open data and may be reused with attribution.",
+  "knbs.footer.licence.body": "Unless stated otherwise on the item itself, content in this repository may be reused for non-commercial purposes, with attribution.",
 
-  "knbs.footer.licence.cc": "CC BY 4.0",
+  "knbs.footer.licence.cc": "CC BY-NC 4.0",
 
   "knbs.footer.services.head": "Repository services",
 

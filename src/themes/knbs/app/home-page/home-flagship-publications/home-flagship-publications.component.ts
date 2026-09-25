@@ -4,24 +4,34 @@ import {
   Component,
   OnInit,
 } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import {
+  Params,
+  RouterLink,
+} from '@angular/router';
 import { DSONameService } from '@dspace/core/breadcrumbs/dso-name.service';
+import {
+  SortDirection,
+  SortOptions,
+} from '@dspace/core/cache/models/sort-options.model';
 import { BitstreamDataService } from '@dspace/core/data/bitstream-data.service';
 import { PaginatedList } from '@dspace/core/data/paginated-list.model';
 import { RemoteData } from '@dspace/core/data/remote-data';
+import { PaginationComponentOptions } from '@dspace/core/pagination/pagination-component-options.model';
 import {
   getBitstreamDownloadRoute,
   getItemPageRoute,
 } from '@dspace/core/router/utils/dso-route.utils';
 import { Bitstream } from '@dspace/core/shared/bitstream.model';
 import { BitstreamFormat } from '@dspace/core/shared/bitstream-format.model';
+import { DSpaceObjectType } from '@dspace/core/shared/dspace-object-type.model';
 import { followLink } from '@dspace/core/shared/follow-link-config.model';
 import { Item } from '@dspace/core/shared/item.model';
 import { getFirstCompletedRemoteData } from '@dspace/core/shared/operators';
-import {
-  hasValue,
-  isNotEmpty,
-} from '@dspace/shared/utils/empty.util';
+import { PaginatedSearchOptions } from '@dspace/core/shared/search/models/paginated-search-options.model';
+import { SearchFilter } from '@dspace/core/shared/search/models/search-filter.model';
+import { SearchObjects } from '@dspace/core/shared/search/models/search-objects.model';
+import { SearchResult } from '@dspace/core/shared/search/models/search-result.model';
+import { hasValue } from '@dspace/shared/utils/empty.util';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   combineLatest as observableCombineLatest,
@@ -30,22 +40,27 @@ import {
 } from 'rxjs';
 import {
   map,
+  shareReplay,
   switchMap,
 } from 'rxjs/operators';
 
+import { SearchService } from '../../../../../app/shared/search/search.service';
 import { FileSizePipe } from '../../../../../app/shared/utils/file-size-pipe';
 import {
   FlagshipDownload,
   FlagshipPublicationView,
 } from './flagship-publication.model';
 import {
-  FlagshipPublicationConfig,
   KNBS_DOWNLOAD_BUNDLE,
   KNBS_DOWNLOAD_LABELS,
-  KNBS_FLAGSHIP_PUBLICATIONS,
+  KNBS_FEATURED_CARDS,
+  KNBS_FEATURED_CONFIGURATION,
+  KNBS_FEATURED_FILTER,
+  KNBS_FEATURED_SORT_FIELD,
+  KNBS_FEATURED_VALUE,
   KNBS_MAX_DOWNLOADS_PER_CARD,
+  KNBS_SEARCH_PAGINATION_ID,
 } from './flagship-publications.config';
-import { HandleItemDataService } from './handle-item-data.service';
 
 /**
  * Longest string still plausible as a file extension. Guards against names such as
@@ -54,12 +69,13 @@ import { HandleItemDataService } from './handle-item-data.service';
 const MAX_EXTENSION_LENGTH = 8;
 
 /**
- * The four flagship national releases promoted on the KNBS homepage.
+ * The national releases promoted on the KNBS homepage.
  *
- * Each card resolves its curated handle to a live item, then renders that item's title, abstract
- * and issue date, its permanent handle URI, and one direct download button per bitstream in the
- * ORIGINAL bundle (PDF / XLSX / CSV / GeoJSON / ...). Cards whose handle is not configured, or
- * whose item is unavailable, fall back to the curated copy and a Discovery search link.
+ * The cards are not curated in the frontend: Discovery is asked for the items carrying the
+ * `local.featured` tag, newest issue date first, and the four most recent are rendered. Each card
+ * shows the item's title, abstract and issue date, and one direct download button per bitstream in
+ * the ORIGINAL bundle (PDF / XLSX / CSV / GeoJSON / ...). When more items are featured than fit on
+ * the homepage, a link to the full, sortable list is shown below the grid.
  */
 @Component({
   selector: 'ds-knbs-home-flagship-publications',
@@ -77,39 +93,72 @@ export class HomeFlagshipPublicationsComponent implements OnInit {
 
   publications$: Observable<FlagshipPublicationView[]>;
 
+  /**
+   * Whether more items are featured than fit on the homepage, which is when the "view all" link
+   * becomes worth showing.
+   */
+  showViewAll$: Observable<boolean>;
+
+  /**
+   * Query parameters of the "view all" link: the same filter and sort order as the homepage, in the
+   * form the search page reads them. The sort is only the starting point there, the search page's
+   * own sort dropdown stays fully usable.
+   */
+  readonly viewAllParams: Params = {
+    [KNBS_FEATURED_FILTER]: KNBS_FEATURED_VALUE,
+    [`${KNBS_SEARCH_PAGINATION_ID}.sf`]: KNBS_FEATURED_SORT_FIELD,
+    [`${KNBS_SEARCH_PAGINATION_ID}.sd`]: SortDirection.DESC,
+  };
+
   constructor(
-    private handleItemService: HandleItemDataService,
+    private searchService: SearchService,
     private bitstreamService: BitstreamDataService,
     private dsoNameService: DSONameService,
   ) {
   }
 
   ngOnInit(): void {
-    this.publications$ = observableCombineLatest(
-      KNBS_FLAGSHIP_PUBLICATIONS.map((config: FlagshipPublicationConfig) => this.resolve(config)),
-    );
-  }
-
-  private resolve(config: FlagshipPublicationConfig): Observable<FlagshipPublicationView> {
-    if (!isNotEmpty(config.handle)) {
-      return of(this.fallbackView(config));
-    }
-    return this.handleItemService.findByHandle(config.handle).pipe(
+    const featured$: Observable<SearchObjects<Item>> = this.searchService.search<Item>(new PaginatedSearchOptions({
+      configuration: KNBS_FEATURED_CONFIGURATION,
+      dsoTypes: [DSpaceObjectType.ITEM],
+      filters: [new SearchFilter(KNBS_FEATURED_FILTER, [KNBS_FEATURED_VALUE])],
+      sort: new SortOptions(KNBS_FEATURED_SORT_FIELD, SortDirection.DESC),
+      pagination: Object.assign(new PaginationComponentOptions(), {
+        id: 'knbs-featured',
+        pageSize: KNBS_FEATURED_CARDS,
+        currentPage: 1,
+      }),
+    })).pipe(
       getFirstCompletedRemoteData(),
-      switchMap((rd: RemoteData<Item>) => rd.hasSucceeded && rd.payload !== undefined
-        ? this.withDownloads(config, rd.payload)
-        : of(this.fallbackView(config))),
+      map((rd: RemoteData<SearchObjects<Item>>) => rd.hasSucceeded ? rd.payload : null),
+      shareReplay({ bufferSize: 1, refCount: false }),
+    );
+
+    this.publications$ = featured$.pipe(
+      switchMap((results: SearchObjects<Item>) => this.toViews(
+        (results?.page ?? []).map((result: SearchResult<Item>) => result.indexableObject))),
+    );
+
+    this.showViewAll$ = featured$.pipe(
+      map((results: SearchObjects<Item>) => (results?.totalElements ?? 0) > KNBS_FEATURED_CARDS),
     );
   }
 
-  private withDownloads(config: FlagshipPublicationConfig, item: Item): Observable<FlagshipPublicationView> {
+  private toViews(items: Item[]): Observable<FlagshipPublicationView[]> {
+    if (items.length === 0) {
+      return of([]);
+    }
+    return observableCombineLatest(items.map((item: Item) => this.withDownloads(item)));
+  }
+
+  private withDownloads(item: Item): Observable<FlagshipPublicationView> {
     return this.bitstreamService.findAllByItemAndBundleName(item, KNBS_DOWNLOAD_BUNDLE, {
       elementsPerPage: KNBS_MAX_DOWNLOADS_PER_CARD,
       currentPage: 1,
     }, true, true, followLink('format')).pipe(
       getFirstCompletedRemoteData(),
       switchMap((rd: RemoteData<PaginatedList<Bitstream>>) => this.toDownloads(rd.hasSucceeded ? rd.payload.page : [])),
-      map((downloads: FlagshipDownload[]) => this.toView(config, item, downloads)),
+      map((downloads: FlagshipDownload[]) => this.toView(item, downloads)),
     );
   }
 
@@ -161,29 +210,15 @@ export class HomeFlagshipPublicationsComponent implements OnInit {
     return format?.extensions?.[0]?.toLowerCase() ?? '';
   }
 
-  private toView(config: FlagshipPublicationConfig, item: Item, downloads: FlagshipDownload[]): FlagshipPublicationView {
+  private toView(item: Item, downloads: FlagshipDownload[]): FlagshipPublicationView {
     return {
-      config,
-      resolved: true,
-      title: item.firstMetadataValue('dc.title') ?? config.fallbackTitle,
-      description: item.firstMetadataValue('dc.description.abstract') ?? config.fallbackDescription,
-      date: item.firstMetadataValue('dc.date.issued') ?? config.fallbackDate,
+      id: item.uuid,
+      title: this.dsoNameService.getName(item),
+      description: item.firstMetadataValue('dc.description.abstract') ?? '',
+      date: item.firstMetadataValue('dc.date.issued') ?? '',
       handleUri: item.firstMetadataValue('dc.identifier.uri') ?? `https://hdl.handle.net/${item.handle}`,
       itemRoute: getItemPageRoute(item),
       downloads,
-    };
-  }
-
-  private fallbackView(config: FlagshipPublicationConfig): FlagshipPublicationView {
-    return {
-      config,
-      resolved: false,
-      title: config.fallbackTitle,
-      description: config.fallbackDescription,
-      date: config.fallbackDate,
-      handleUri: null,
-      itemRoute: null,
-      downloads: [],
     };
   }
 

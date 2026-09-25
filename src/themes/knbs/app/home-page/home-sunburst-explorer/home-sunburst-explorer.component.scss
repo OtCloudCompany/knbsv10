@@ -15,10 +15,9 @@
   color: var(--knbs-brown);
 }
 
+// Size and weight come from the site-wide h2 step (_theme_sass_variable_overrides.scss)
 .knbs-explorer__title {
   margin: 0;
-  font-size: 1.75rem;
-  font-weight: 700;
   color: var(--knbs-ink);
 }
 

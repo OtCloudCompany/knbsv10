@@ -32,6 +32,25 @@ $link-hover-color: darken($knbs-brown-dark, 12%) !default;
 /*** TYPOGRAPHY ***/
 $font-family-monospace: 'JetBrains Mono', 'Roboto Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace !default;
 
+// Heading scale, shared by every page: a step of roughly 1.17 from the 16px body text. The DSpace
+// defaults (34px page titles, 28px sections) read as oversized next to KNBS's long report titles,
+// e.g. "Kenya Demographic and Health Survey 2022 Volume 2". Bootstrap's RFS still scales the
+// larger steps down on narrow screens.
+//   h1  28px  page titles: item, community, collection, search, browse
+//   h2  24px  sections: homepage sections, recent submissions, statistics dashboards
+//   h3  20px  sub-sections
+//   h4  18px  modal titles, minor sections
+//   h5  16px  card and sidebar panel titles
+//   h6  14px
+$h1-font-size: 1.75rem !default;
+$h2-font-size: 1.5rem !default;
+$h3-font-size: 1.25rem !default;
+$h4-font-size: 1.125rem !default;
+$h5-font-size: 1rem !default;
+$h6-font-size: .875rem !default;
+$headings-font-weight: 700 !default;
+$headings-line-height: 1.25 !default;
+
 /*** DSPACE CHROME ***/
 // The main navigation sits inside the white header row (see themes/knbs/app/header), so it has no
 // band of its own: it inherits the header background and marks hover/active state with a gold rule.

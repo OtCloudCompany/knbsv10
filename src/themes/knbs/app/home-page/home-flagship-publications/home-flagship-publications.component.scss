@@ -15,16 +15,15 @@
   color: var(--knbs-brown);
 }
 
+// Size and weight come from the site-wide h2 step (_theme_sass_variable_overrides.scss)
 .knbs-flagship__title {
   margin: 0;
-  font-size: 1.75rem;
-  font-weight: 700;
   color: var(--knbs-ink);
 }
 
 .knbs-flagship__lead {
   margin: .35rem 0 1.25rem;
-  max-width: 65ch;
+  // max-width: 65ch;
   color: var(--knbs-ink-muted);
 }
 
@@ -182,8 +181,11 @@
   opacity: .75;
 }
 
-.knbs-card__search {
-  font-size: .8125rem;
+.knbs-flagship__more {
+  display: block;
+  width: fit-content;
+  margin: 1rem 0 0 auto;
+  font-size: .875rem;
   font-weight: 600;
   color: var(--knbs-brown-dark);
   text-decoration: none;

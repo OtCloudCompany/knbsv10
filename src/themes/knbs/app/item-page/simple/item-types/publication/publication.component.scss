@@ -1,0 +1,10 @@
+// The thumbnail caps its own width (--ds-thumbnail-max-width), which leaves it a block narrower
+// than the card: the surrounding text-center cannot move it, auto margins can.
+.card-body ::ng-deep ds-thumbnail .thumbnail {
+  margin-inline: auto;
+}
+
+// The download links are d-block anchors, so an inherited text-align centers their text
+.file-section-wrapper {
+  text-align: center;
+}

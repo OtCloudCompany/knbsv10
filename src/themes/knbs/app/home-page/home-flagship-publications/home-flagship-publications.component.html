@@ -7,16 +7,12 @@
 
   @if (publications$ | async; as publications) {
   <div class="knbs-flagship__grid">
-    @for (publication of publications; track publication.config.key) {
+    @for (publication of publications; track publication.id) {
     <article class="knbs-card">
       <p class="knbs-card__date">{{ publication.date }}</p>
 
       <h3 class="knbs-card__title">
-        @if (publication.itemRoute) {
         <a [routerLink]="publication.itemRoute">{{ publication.title }}</a>
-        } @else {
-        {{ publication.title }}
-        }
       </h3>
 
       <p class="knbs-card__description">{{ publication.description }}</p>
@@ -30,15 +26,17 @@
           <span class="knbs-download__format">{{ download.label }}</span>
           <span class="knbs-download__size">{{ download.sizeBytes | dsFileSize }}</span>
         </a>
-        } @empty {
-        <a class="knbs-card__search" routerLink="/search" [queryParams]="{ query: publication.config.searchQuery }">
-          {{ 'knbs.flagship.search' | translate }} <span aria-hidden="true">&rarr;</span>
-        </a>
         }
       </div>
     </article>
     }
   </div>
+
+  @if (showViewAll$ | async) {
+  <a class="knbs-flagship__more" routerLink="/search" [queryParams]="viewAllParams">
+    {{ 'knbs.flagship.viewAll' | translate }} <span aria-hidden="true">&rarr;</span>
+  </a>
+  }
   } @else {
   <div class="knbs-flagship__grid" aria-hidden="true">
     @for (placeholder of [1, 2, 3, 4]; track placeholder) {
