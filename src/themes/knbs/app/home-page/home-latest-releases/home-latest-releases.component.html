@@ -1,0 +1,28 @@
+@if (releases$ | async; as releases) {
+@if (releases.length > 0) {
+<section class="knbs-latest" id="latest-releases" aria-labelledby="knbs-latest-title">
+  <header class="knbs-latest__intro">
+    <p class="knbs-eyebrow">{{ 'knbs.latest.eyebrow' | translate }}</p>
+    <h2 class="knbs-latest__title" id="knbs-latest-title">{{ 'home.knbs.latest-releases.head' | translate }}</h2>
+  </header>
+
+  <ol class="knbs-latest__list">
+    @for (release of releases; track release.id) {
+    <li class="knbs-release">
+      <span class="knbs-release__date">{{ release.date }}</span>
+      <span class="knbs-release__body">
+        @if (release.series) {
+        <span class="knbs-release__series">{{ release.series }}</span>
+        }
+        <a class="knbs-release__title" [routerLink]="release.itemRoute">{{ release.title }}</a>
+      </span>
+    </li>
+    }
+  </ol>
+
+  <a class="knbs-latest__more" routerLink="/search" [queryParams]="viewAllParams">
+    {{ 'knbs.latest.viewAll' | translate }} <span aria-hidden="true">&rarr;</span>
+  </a>
+</section>
+}
+}

@@ -199,6 +199,35 @@
   margin-bottom: var(--knbs-section-gap);
 }
 
+// Below lg the two stack, with the series first as they were before the sidebar
+.knbs-home__split {
+  display: flex;
+  flex-direction: column;
+}
+
+.knbs-home__aside {
+  order: -1;
+}
+
+@include media-breakpoint-up(lg) {
+  // `auto` lets the sidebar collapse to nothing while the series shortcuts are hidden
+  .knbs-home__split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+  }
+
+  // Sticky rather than fixed: it stays in view while its row scrolls past and never covers the
+  // footer. No height cap or scroll box: it is as tall as its tiles, and on a screen shorter than
+  // that the lower tiles come into view as the row's end scrolls up.
+  .knbs-home__aside {
+    order: 0;
+    position: sticky;
+    top: 1rem;
+    margin-bottom: var(--knbs-section-gap);
+  }
+}
+
 @include media-breakpoint-down(lg) {
   .knbs-hero__cards {
     grid-template-columns: repeat(2, minmax(0, 1fr));

@@ -4,6 +4,87 @@
   //     npm run merge-i18n -- -s src/themes/knbs/assets/i18n
   // to push the changes back into the language packs. Note that the merge script rewrites the
   // destination files with JSON5.stringify, which strips their comments.
+
+    // ---- KNBS discovery labels (Step 08). Paste inside the top-level { } of
+  // ---- src/themes/knbs/assets/i18n/en.json5, e.g. just before the final closing brace.
+  // ---- ALSO edit 5 lines that already exist in that file (do not add them again):
+  // ----   search.filters.filter.itemtype.head        -> "Item type"
+  // ----   search.filters.filter.itemtype.placeholder -> "Item type"
+  // ----   search.filters.filter.itemtype.label       -> "Search item type"
+  // ----   search.filters.applied.f.itemtype          -> "Item type"
+  // ----   search.filters.filter.dateIssued.head      -> "Publication date"
+
+
+  "search.filters.filter.series.head": "Series",
+  "search.filters.filter.series.placeholder": "Series",
+  "search.filters.filter.series.label": "Search series",
+  "search.filters.applied.f.series": "Series",
+
+  "search.filters.filter.geography.head": "Geographic Coverage",
+  "search.filters.filter.geography.placeholder": "County",
+  "search.filters.filter.geography.label": "Search county",
+  "search.filters.applied.f.geography": "Coverage",
+
+  "search.filters.filter.refyear.head": "Reference Year",
+  "search.filters.filter.refyear.min.placeholder": "From year",
+  "search.filters.filter.refyear.max.placeholder": "To year",
+  "search.filters.filter.refyear.min.label": "From",
+  "search.filters.filter.refyear.max.label": "To",
+  "search.filters.applied.f.refyear.min": "Reference year from",
+  "search.filters.applied.f.refyear.max": "Reference year to",
+
+  "search.filters.filter.frequency.head": "Release Frequency",
+  "search.filters.filter.frequency.placeholder": "Frequency",
+  "search.filters.filter.frequency.label": "Search frequency",
+  "search.filters.applied.f.frequency": "Frequency",
+
+  "search.filters.filter.sdg.head": "SDG",
+  "search.filters.filter.sdg.placeholder": "SDG",
+  "search.filters.filter.sdg.label": "Search SDG",
+  "search.filters.applied.f.sdg": "SDG",
+
+  "search.filters.filter.producer.head": "Producer",
+  "search.filters.filter.producer.placeholder": "Producer",
+  "search.filters.filter.producer.label": "Search producer",
+  "search.filters.applied.f.producer": "Producer",
+
+  "search.filters.filter.funder.head": "Funder / Partner",
+  "search.filters.filter.funder.placeholder": "Funder",
+  "search.filters.filter.funder.label": "Search funder",
+  "search.filters.applied.f.funder": "Funder",
+
+
+  "menu.section.browse_global_by_series": "By Series",
+  "menu.section.browse_global_by_type": "By Item Type",
+  "menu.section.browse_global_by_kenya_geography": "By County",
+  "menu.section.browse_global_by_sdg": "By SDG",
+  "browse.comcol.by.series": "By Series",
+  "browse.comcol.by.type": "By Item Type",
+  "browse.comcol.by.kenya_geography": "By County",
+  "browse.comcol.by.sdg": "By SDG",
+  "browse.metadata.series": "Series",
+  "browse.metadata.type": "Item Type",
+  "browse.metadata.kenya_geography": "County",
+  "browse.metadata.sdg": "Sustainable Development Goal",
+  "browse.metadata.series.breadcrumbs": "Browse by Series",
+  "browse.metadata.type.breadcrumbs": "Browse by Item Type",
+  "browse.metadata.kenya_geography.breadcrumbs": "Browse by County",
+  "browse.metadata.sdg.breadcrumbs": "Browse by SDG",
+  "browse.metadata.kenya_geography.tree.description": "Select Kenya for national publications, or a county",
+  "browse.metadata.sdg.tree.description": "Select a goal to see the publications that report on it",
+
+  "sorting.dc.coverage.temporal.ASC": "Reference year (oldest first)",
+  "sorting.dc.coverage.temporal.DESC": "Reference year (newest first)",
+
+  "item.page.knbs.type": "Item type",
+  "item.page.knbs.series": "Series",
+  "item.page.knbs.frequency": "Release frequency",
+  "item.page.knbs.refyear": "Reference year",
+  "item.page.knbs.coverage": "Geographic coverage",
+  "item.page.knbs.sdg": "Sustainable Development Goals",
+  "item.page.knbs.funder": "Funders and partners",
+  "item.page.knbs.details": "Details",
+  "home.knbs.latest-releases.head": "Latest statistical releases",
   
   // Report-family relationships (KDHS 2022 and similar multi-part publications)
   // Shown on the parent report:
@@ -49,7 +130,7 @@
   // TODO: confirm these two destinations with the repository team before go-live
   "knbs.header.link.resource-centre": "Resource Centre",
 
-  "knbs.header.link.open-data": "Open Data Portal",
+  "knbs.header.link.open-data": "KeNaDa",
 
   "knbs.header.brand.name": "Kenya National Bureau of Statistics",
 
@@ -104,7 +185,7 @@
 
   "knbs.explorer.eyebrow": "Explore",
 
-  "knbs.explorer.title": "Statistical domains",
+  "knbs.explorer.title": "Statistical Domains",
 
   "knbs.explorer.lead": "Explore domains, sub-domains and collections with live item counts. Point at a domain to see where it sits, select a segment to zoom into it.",
 
@@ -136,13 +217,66 @@
 
   "knbs.flagship.eyebrow": "Flagship releases",
 
-  "knbs.flagship.title": "Key national publications",
+  "knbs.flagship.title": "Key National Publications",
 
   "knbs.flagship.lead": "The recurring national releases with one-click downloads of every published format.",
 
   "knbs.flagship.download.aria": "Download {{ title }} as {{ format }}",
 
   "knbs.flagship.viewAll": "View all featured publications",
+
+  /*** Series shortcuts and latest releases (discovery rollout, Step 13) ***/
+
+  "knbs.series.eyebrow": "Regular releases",
+
+  "knbs.series.title": "Browse by Series",
+
+  "knbs.series.lead": "Every edition of KNBS's recurring publications, newest reference year first.",
+
+  "knbs.series.tile.count.one": "1 item",
+
+  "knbs.series.tile.count.other": "{{ count }} items",
+
+  "knbs.series.browseAll": "All series",
+
+  "knbs.series.cpi": "CPIs & Inflation",
+
+  "knbs.series.lei": "Leading Economic Indicators",
+
+  "knbs.series.qgdp": "Quarterly GDP",
+
+  "knbs.series.qbop": "Balance of Payments",
+
+  "knbs.series.ppi": "Producer Price Indices",
+
+  "knbs.series.qlfs": "Labour Force Reports",
+
+  "knbs.series.economic-survey": "Economic Surveys",
+
+  "knbs.series.statistical-abstract": "Statistical Abstracts",
+
+  "knbs.series.county-abstract": "County Statistical Abstracts",
+
+  "knbs.series.kdhs": "Demographic & Health Surveys",
+
+  "knbs.series.kphc": "Population & Housing Censuses",
+
+  "knbs.series.facts-figures": "Facts & Figures",
+
+  "knbs.series.frequency.monthly": "Monthly",
+
+  "knbs.series.frequency.quarterly": "Quarterly",
+
+  "knbs.series.frequency.annual": "Annual",
+
+  "knbs.series.frequency.periodic": "Periodic",
+
+  "knbs.series.frequency.decennial": "Every 10 years",
+
+  "knbs.latest.eyebrow": "Just released",
+
+  "knbs.latest.viewAll": "View all statistical releases",
+  "submission.sections.describe.relationship-lookup.title.FactSheet": "Fact Sheets",
 
   "search.filters.applied.f.featured": "Featured",
 

@@ -14,6 +14,8 @@ import { SuggestionsPopupComponent } from '../../../../app/notifications/suggest
 import { ThemedConfigurationSearchPageComponent } from '../../../../app/search-page/themed-configuration-search-page.component';
 import { ThemedSearchFormComponent } from '../../../../app/shared/search-form/themed-search-form.component';
 import { HomeFlagshipPublicationsComponent } from './home-flagship-publications/home-flagship-publications.component';
+import { HomeLatestReleasesComponent } from './home-latest-releases/home-latest-releases.component';
+import { HomeSeriesShortcutsComponent } from './home-series-shortcuts/home-series-shortcuts.component';
 import { HomeSunburstExplorerComponent } from './home-sunburst-explorer/home-sunburst-explorer.component';
 
 /**
@@ -42,6 +44,8 @@ interface HeroCard {
     AsyncPipe,
     HomeCoarComponent,
     HomeFlagshipPublicationsComponent,
+    HomeLatestReleasesComponent,
+    HomeSeriesShortcutsComponent,
     HomeSunburstExplorerComponent,
     MarkdownViewerComponent,
     NgTemplateOutlet,
@@ -61,10 +65,10 @@ export class HomePageComponent extends BaseComponent {
    */
   // TODO: curate this list with the repository team once there are search logs to curate it from
   trendingSearches: string[] = [
+    'Kenya Demographic and Health Surveys',
     'Economic Surveys',
     'Population and Housing Censuses',
     'Consumer Price Indices',
-    'Agriculture',
     'County Statistical Abstracts',
   ];
 

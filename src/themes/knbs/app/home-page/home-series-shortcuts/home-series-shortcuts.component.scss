@@ -1,0 +1,178 @@
+:host {
+  display: block;
+}
+
+.knbs-series {
+  margin-bottom: var(--knbs-section-gap);
+}
+
+.knbs-eyebrow {
+  margin: 0 0 .25rem;
+  font-family: var(--knbs-mono-font);
+  font-size: .75rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--knbs-brown);
+}
+
+// Size and weight come from the site-wide h2 step (_theme_sass_variable_overrides.scss)
+.knbs-series__title {
+  margin: 0;
+  color: var(--knbs-ink);
+}
+
+.knbs-series__lead {
+  margin: .35rem 0 1.25rem;
+  color: var(--knbs-ink-muted);
+}
+
+.knbs-series__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.knbs-series-tile {
+  display: flex;
+  align-items: center;
+  gap: .85rem;
+  height: 100%;
+  padding: .9rem 1rem;
+  background: var(--knbs-surface);
+  border: 1px solid var(--knbs-gray);
+  border-right: 4px solid var(--knbs-brown);
+  border-radius: var(--knbs-radius);
+  color: var(--knbs-ink);
+  text-decoration: none;
+  transition: box-shadow .2s ease, transform .2s ease, border-color .2s ease;
+
+  &:hover,
+  &:focus-visible {
+    border-right-color: var(--knbs-gold);
+    box-shadow: var(--knbs-shadow-hover);
+    transform: translateY(-2px);
+    color: var(--knbs-ink);
+    text-decoration: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--knbs-brown);
+    outline-offset: 2px;
+  }
+}
+
+.knbs-series-tile__icon {
+  flex: 0 0 2.25rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--knbs-light-brown);
+  color: var(--knbs-brown);
+  font-size: 1rem;
+}
+
+.knbs-series-tile__body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.knbs-series-tile__name {
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.knbs-series-tile__meta {
+  margin-top: .15rem;
+  font-family: var(--knbs-mono-font);
+  font-size: .6875rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--knbs-ink-muted);
+}
+
+.knbs-series__more {
+  display: inline-block;
+  margin-top: 1rem;
+  font-weight: 600;
+  color: var(--knbs-brown-dark);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+@include media-breakpoint-down(xl) {
+  .knbs-series__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  .knbs-series__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .knbs-series__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+// Sidebar variant (home page, next to recent submissions): one column of tiles at a fixed width.
+// The width lives here rather than on the parent's grid track, so a hidden section takes no room.
+@include media-breakpoint-up(lg) {
+  :host(.knbs-series--sidebar) {
+    .knbs-series {
+      width: 20rem;
+      margin: 0 0 0 2rem;
+    }
+
+    .knbs-series__title {
+      font-size: 1.25rem;
+    }
+
+    .knbs-series__lead {
+      margin-bottom: 1rem;
+      font-size: .875rem;
+    }
+
+    .knbs-series__grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: .5rem;
+    }
+
+    .knbs-series-tile {
+      padding: .5rem .75rem;
+
+      // A sideways nudge rather than a lift, which would push into the tile above in the tight
+      // single column. Scoped to no-preference because this selector outranks the
+      // reduced-motion rule below.
+      @media (prefers-reduced-motion: no-preference) {
+        &:hover,
+        &:focus-visible {
+          transform: translateX(2px);
+        }
+      }
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .knbs-series-tile {
+    transition: none;
+
+    &:hover,
+    &:focus-visible {
+      transform: none;
+    }
+  }
+}

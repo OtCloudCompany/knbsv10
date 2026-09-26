@@ -1,0 +1,35 @@
+@if (shortcuts$ | async; as shortcuts) {
+@if (shortcuts.length > 0) {
+<section class="knbs-series" id="series-shortcuts" aria-labelledby="knbs-series-title">
+  <header class="knbs-series__intro">
+    <p class="knbs-eyebrow">{{ 'knbs.series.eyebrow' | translate }}</p>
+    <h2 class="knbs-series__title" id="knbs-series-title">{{ 'knbs.series.title' | translate }}</h2>
+    <p class="knbs-series__lead">{{ 'knbs.series.lead' | translate }}</p>
+  </header>
+
+  <ul class="knbs-series__grid">
+    @for (shortcut of shortcuts; track shortcut.series) {
+    <li>
+      <a class="knbs-series-tile" routerLink="/search" [queryParams]="shortcut.queryParams"
+        [title]="shortcut.series"
+        [attr.aria-label]="shortcut.series + ': ' + (shortcut.countKey | translate:{ count: shortcut.count })">
+        <i class="fas {{ shortcut.icon }} knbs-series-tile__icon" aria-hidden="true"></i>
+        <span class="knbs-series-tile__body">
+          <span class="knbs-series-tile__name">{{ shortcut.labelKey | translate }}</span>
+          <span class="knbs-series-tile__meta">
+            {{ shortcut.frequencyKey | translate }}
+            <span aria-hidden="true">&middot;</span>
+            {{ shortcut.countKey | translate:{ count: shortcut.count } }}
+          </span>
+        </span>
+      </a>
+    </li>
+    }
+  </ul>
+
+  <a class="knbs-series__more" routerLink="/browse/series">
+    {{ 'knbs.series.browseAll' | translate }} <span aria-hidden="true">&rarr;</span>
+  </a>
+</section>
+}
+}

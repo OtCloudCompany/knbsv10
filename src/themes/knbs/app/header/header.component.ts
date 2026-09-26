@@ -67,7 +67,7 @@ export class HeaderComponent extends BaseComponent implements OnInit {
   // TODO: confirm these two destinations with the repository team before go-live
   utilityLinks: UtilityLink[] = [
     // { labelKey: 'knbs.header.link.resource-centre', href: 'https://www.knbs.or.ke/' },
-    { labelKey: 'knbs.header.link.open-data', href: 'https://kenya.opendataforafrica.org/' },
+    { labelKey: 'knbs.header.link.open-data', href: 'https://statistics.knbs.or.ke/nada/index.php/home' },
   ];
 
   protected readonly appConfig: AppConfig = inject(APP_CONFIG);

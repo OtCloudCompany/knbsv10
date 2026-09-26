@@ -8,9 +8,8 @@
 npm-debug.log
 
 /build/
-
+/custom/
 /coverage
-
 /dist/
 /coverage/
 

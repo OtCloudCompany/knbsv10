@@ -46,10 +46,19 @@
 
     <ds-knbs-home-flagship-publications></ds-knbs-home-flagship-publications>
 
-    @if (recentSubmissionspageSize > 0) {
-    <section class="knbs-recent">
-      <ds-recent-item-list></ds-recent-item-list>
-    </section>
-    }
+    <!-- <ds-knbs-home-latest-releases></ds-knbs-home-latest-releases> -->
+
+    <!-- Recent submissions with the series shortcuts as a sticky sidebar on the right. The sidebar
+         takes its width from the shortcuts, so when they hide themselves the list keeps the full row. -->
+    <div class="knbs-home__split">
+      @if (recentSubmissionspageSize > 0) {
+      <section class="knbs-recent">
+        <ds-recent-item-list></ds-recent-item-list>
+      </section>
+      }
+      <aside class="knbs-home__aside">
+        <ds-knbs-home-series-shortcuts class="knbs-series--sidebar"></ds-knbs-home-series-shortcuts>
+      </aside>
+    </div>
   </div>
 </ng-template>

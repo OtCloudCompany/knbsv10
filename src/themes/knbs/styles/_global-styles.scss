@@ -177,6 +177,45 @@ li.breadcrumb-item a {
     text-decoration: none;
 }
 
+/* Item page "Details" card (publication and untyped item pages): each metadata field becomes a
+   label | value row separated by hairlines, instead of a stack of heading + value blocks.
+   ds-metadata-field-wrapper renders every field as .simple-view-element > header + body, so the
+   grid is applied there. Fields with no value are already d-none, so they leave no empty row.
+   The view-encapsulated rule in metadata-field-wrapper.component.scss gives each field a 15px
+   bottom margin at equal specificity and loads later, hence the !important on margin. */
+.item-details .item-details-list {
+    // Tuck the first row's top rule under the card header's bottom border
+    margin-top: calc(-1 * var(--bs-border-width));
+}
+
+.item-details .item-details-list .simple-view-element {
+    display: grid;
+    grid-template-columns: minmax(10rem, 32%) minmax(0, 1fr);
+    column-gap: 1.5rem;
+    align-items: baseline;
+    margin: 0 !important;
+    padding: 0.4rem 1rem;
+    border-top: var(--bs-border-width) solid var(--bs-border-color);
+}
+
+.item-details .item-details-list .simple-view-element-header {
+    margin: 0;
+    font-size: 0.875rem !important;
+    font-weight: 600;
+    color: var(--bs-secondary-color);
+}
+
+.item-details .item-details-list .simple-view-element-body {
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 575.98px) {
+    .item-details .item-details-list .simple-view-element {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: 0.25rem;
+    }
+}
+
 /* Search/discover sidebar filters: a light shadow to lift each filter card off the
    page background, using the same --knbs-shadow token as the nav dropdown above. */
 .facet-filter {
@@ -205,4 +244,16 @@ ds-themed-collection-page {
 
 .setting-option {
     box-shadow: var(--knbs-shadow) !important;
+}
+
+.item-list-title {
+    font-weight: bold !important;
+}
+
+// The base component sets `outline: none`, so colour and width alone never draw anything
+.tag-input {
+    outline-style: solid !important;
+    outline-color: var(--bs-border-color) !important;
+    outline-width: var(--bs-border-width) !important;
+    border-radius: var(--bs-border-radius);
 }
