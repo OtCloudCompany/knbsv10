@@ -8,7 +8,6 @@ import {
   Params,
   RouterLink,
 } from '@angular/router';
-import { SortDirection } from '@dspace/core/cache/models/sort-options.model';
 import { RemoteData } from '@dspace/core/data/remote-data';
 import { getFirstCompletedRemoteData } from '@dspace/core/shared/operators';
 import { FacetValue } from '@dspace/core/shared/search/models/facet-value.model';
@@ -28,14 +27,13 @@ import {
 
 import { SearchService } from '../../../../../app/shared/search/search.service';
 import { SearchConfigurationService } from '../../../../../app/shared/search/search-configuration.service';
-import { KNBS_SEARCH_PAGINATION_ID } from '../home-flagship-publications/flagship-publications.config';
 import {
   KNBS_SERIES_CONFIGURATION,
   KNBS_SERIES_FACET,
   KNBS_SERIES_FACET_PAGE_SIZE,
   KNBS_SERIES_SHORTCUTS,
-  KNBS_SERIES_SORT_FIELD,
   SeriesShortcut,
+  seriesSearchQueryParams,
 } from './series-shortcuts.config';
 
 /**
@@ -119,11 +117,7 @@ export class HomeSeriesShortcutsComponent implements OnInit {
       ...shortcut,
       count,
       countKey: count === 1 ? 'knbs.series.tile.count.one' : 'knbs.series.tile.count.other',
-      queryParams: {
-        [`f.${KNBS_SERIES_FACET}`]: `${shortcut.series},equals`,
-        [`${KNBS_SEARCH_PAGINATION_ID}.sf`]: KNBS_SERIES_SORT_FIELD,
-        [`${KNBS_SEARCH_PAGINATION_ID}.sd`]: SortDirection.DESC,
-      },
+      queryParams: seriesSearchQueryParams(shortcut.series),
     };
   }
 

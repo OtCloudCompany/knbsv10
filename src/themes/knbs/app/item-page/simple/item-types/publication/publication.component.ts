@@ -133,6 +133,8 @@ export class PublicationComponent extends BaseComponent implements OnInit {
       { id: 'keyindicator', relationType: 'isKeyIndicatorReportOfReport', labelKey: 'relationships.Publication.isKeyIndicatorReportOfReport.Publication' },
       { id: 'reportofkeyindicator', relationType: 'isReportOfKeyIndicatorReport', labelKey: 'relationships.Publication.isReportOfKeyIndicatorReport.Publication' },
       { id: 'factsheet', relationType: 'isFactSheetOfReport', labelKey: 'relationships.Publication.isFactSheetOfReport.FactSheet' },
+      { id: 'component', relationType: 'isComponentOfReport', labelKey: 'relationships.Publication.isComponentOfReport.Publication' },
+      { id: 'reportofcomponent', relationType: 'isReportOfComponent', labelKey: 'relationships.Publication.isReportOfComponent.Publication' },
       { id: 'project', relationType: 'isProjectOfPublication', labelKey: 'relationships.Publication.isProjectOfPublication.Project' },
       { id: 'dataset', relationType: 'isDatasetOfPublication', labelKey: 'relationships.Publication.isDatasetOfPublication.Dataset' },
     ].map((tab) => ({ ...tab, hasItems$: this.hasRelatedItems(tab.relationType) }));

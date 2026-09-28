@@ -90,10 +90,10 @@
   // Shown on the parent report:
   "relationships.Publication.isVolumeOfReport.Publication": "Volumes",
   "relationships.Publication.isKeyIndicatorReportOfReport.Publication": "Key Indicator Reports",
-"relationships.Publication.isReportOfVolume.Publication": "Volume of",
-"relationships.Publication.isReportOfKeyIndicatorReport.Publication": "Key Indicators Report of",
-"relationships.FactSheet.isReportOfFactSheet.Publication": "Fact Sheet of",
-"relationships.EconomicSurvey.isAuthorOfEconomicSurvey.Person": "Is Author of",
+"relationships.Publication.isReportOfVolume.Publication": "Main report",
+"relationships.Publication.isReportOfKeyIndicatorReport.Publication": "Main report",
+"relationships.FactSheet.isReportOfFactSheet.Publication": "Main report",
+// "relationships.EconomicSurvey.isAuthorOfEconomicSurvey.Person": "Is Author of",
 // Shown on the Economic Survey item:
 "relationships.EconomicSurvey.isAuthorOfEconomicSurvey.Person": "Authors",
 "relationships.EconomicSurvey.isDatasetOfEconomicSurvey.Dataset": "Datasets",
@@ -111,6 +111,11 @@
 "relationships.Person.isEconomicSurveyOfAuthor.EconomicSurvey": "Economic Surveys",
 "relationships.Dataset.isEconomicSurveyOfDataset.EconomicSurvey": "Economic Survey",
 "relationships.Publication.isFactSheetOfReport.FactSheet":"Fact Sheets",
+
+  // Report -> posters, wallcharts, chapters, presentations, atlases, analytical reports (Step 18)
+  "relationships.Publication.isComponentOfReport.Publication": "Related Outputs",
+
+  "relationships.Publication.isReportOfComponent.Publication": "Main Report",
 "statisticalreport.listelement.badge": "Statistical Report",
 
   // DSpace default: "All Domains"
@@ -130,7 +135,7 @@
   // TODO: confirm these two destinations with the repository team before go-live
   "knbs.header.link.resource-centre": "Resource Centre",
 
-  "knbs.header.link.open-data": "KeNaDa",
+  "knbs.header.link.open-data": "KeNADA",
 
   "knbs.header.brand.name": "Kenya National Bureau of Statistics",
 
@@ -211,7 +216,7 @@
 
   "knbs.explorer.open": "Open",
 
-  "knbs.explorer.hint": "Point at a segment of the wheel, or at a domain in the list, to see its item count.",
+  "knbs.explorer.hint": "Point at a segment on the sunburst, or at a domain in the list, to see its item count.",
 
   /*** Flagship publications ***/
 
@@ -231,7 +236,7 @@
 
   "knbs.series.title": "Browse by Series",
 
-  "knbs.series.lead": "Every edition of KNBS's recurring publications, newest reference year first.",
+  "knbs.series.lead": "Every edition of KNBS's recurring publications, latest first.",
 
   "knbs.series.tile.count.one": "1 item",
 

@@ -1,9 +1,13 @@
+import { SortDirection } from '@dspace/core/cache/models/sort-options.model';
+
+import { KNBS_SEARCH_PAGINATION_ID } from '../home-flagship-publications/flagship-publications.config';
+
 /**
  * Configuration of the series shortcuts shown on the KNBS homepage.
  *
- * Each tile opens a search filtered on one publication series (dc.relation.ispartofseries), newest
- * reference year first. The backend exposes that field as the "series" facet in discovery.xml
- * (Step 9 of the discovery rollout), and dc.coverage.temporal as a sort option (Step 10).
+ * Each tile opens a search filtered on one publication series (dc.relation.ispartofseries), latest
+ * edition first. The backend exposes that field as the "series" facet in discovery.xml (Step 9 of
+ * the discovery rollout).
  */
 
 /**
@@ -24,9 +28,26 @@ export const KNBS_SERIES_CONFIGURATION = 'default';
 export const KNBS_SERIES_FACET_PAGE_SIZE = 100;
 
 /**
- * Sort applied when a tile opens the search page: reference year, newest first.
+ * Sort applied when a tile opens the search page: issue date, newest first.
+ *
+ * Not dc.coverage.temporal: it holds only the reference year, so the twelve monthly releases of a
+ * year tie and Solr returns them in arbitrary order (July, June, April, January...). The issue date
+ * is a full date for releases, which puts the months and quarters in order.
  */
-export const KNBS_SERIES_SORT_FIELD = 'dc.coverage.temporal';
+export const KNBS_SERIES_SORT_FIELD = 'dc.date.issued';
+
+/**
+ * Query params for /search listing one series, latest edition first. Shared by the series
+ * tiles and the hero's trending chips so both open the same results.
+ * @param series stored value in dc.relation.ispartofseries, see {@link SeriesShortcut.series}
+ */
+export function seriesSearchQueryParams(series: string): Record<string, string> {
+  return {
+    [`f.${KNBS_SERIES_FACET}`]: `${series},equals`,
+    [`${KNBS_SEARCH_PAGINATION_ID}.sf`]: KNBS_SERIES_SORT_FIELD,
+    [`${KNBS_SEARCH_PAGINATION_ID}.sd`]: SortDirection.DESC,
+  };
+}
 
 /**
  * A tile on the homepage.

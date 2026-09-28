@@ -19,7 +19,25 @@
   <div [ngClass]="showThumbnails ? 'col-9' : 'col-md-12'">
     <div class="d-flex">
       @if (showLabel) {
-        <ds-badges [object]="dso" [context]="context" [showAccessStatus]="true"></ds-badges>
+        @if (showItemTypeBadge) {
+          <!-- ds-badges with the entity type swapped for dc.type, linked to that type's search -->
+          <div>
+            <ds-status-badge [object]="dso"></ds-status-badge>
+            <div>
+              @if (itemType; as type) {
+                <span class="pe-1">
+                  <span class="sr-only">{{ 'knbs.listelement.badge.item-type' | translate }}</span>
+                  <a class="badge bg-info text-decoration-none" [routerLink]="['/search']"
+                    [queryParams]="itemTypeQueryParams(type)">{{ type }}</a>
+                  <span class="sr-only">, </span>
+                </span>
+              }
+              <ds-access-status-badge [object]="dso"></ds-access-status-badge>
+            </div>
+          </div>
+        } @else {
+          <ds-badges [object]="dso" [context]="context" [showAccessStatus]="true"></ds-badges>
+        }
       }
     </div>
 

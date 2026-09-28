@@ -12,8 +12,8 @@
 
     <nav class="knbs-hero__trending" [attr.aria-label]="'knbs.home.hero.trending.label' | translate">
       <span class="knbs-hero__trending-head">{{ 'knbs.home.hero.trending' | translate }}</span>
-      @for (term of trendingSearches; track term) {
-      <a class="knbs-chip" routerLink="/search" [queryParams]="{ query: term }">{{ term }}</a>
+      @for (search of trendingSearches; track search.series) {
+      <a class="knbs-chip" routerLink="/search" [queryParams]="search.queryParams">{{ search.label }}</a>
       }
     </nav>
   </div>

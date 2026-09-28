@@ -27,6 +27,11 @@ import { KnbsModeSwitcherComponent } from '../shared/mode/knbs-mode-switcher.com
 interface UtilityLink {
   labelKey: string;
   href: string;
+  /**
+   * Show the label as written instead of in the strip's capitals, for names with their own
+   * casing (KeNADA)
+   */
+  keepCase?: boolean;
 }
 
 /**
@@ -67,7 +72,7 @@ export class HeaderComponent extends BaseComponent implements OnInit {
   // TODO: confirm these two destinations with the repository team before go-live
   utilityLinks: UtilityLink[] = [
     // { labelKey: 'knbs.header.link.resource-centre', href: 'https://www.knbs.or.ke/' },
-    { labelKey: 'knbs.header.link.open-data', href: 'https://statistics.knbs.or.ke/nada/index.php/home' },
+    { labelKey: 'knbs.header.link.open-data', href: 'https://statistics.knbs.or.ke/nada/index.php/home', keepCase: true },
   ];
 
   protected readonly appConfig: AppConfig = inject(APP_CONFIG);

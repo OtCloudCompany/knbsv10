@@ -16,11 +16,24 @@ import { ThemedSearchFormComponent } from '../../../../app/shared/search-form/th
 import { HomeFlagshipPublicationsComponent } from './home-flagship-publications/home-flagship-publications.component';
 import { HomeLatestReleasesComponent } from './home-latest-releases/home-latest-releases.component';
 import { HomeSeriesShortcutsComponent } from './home-series-shortcuts/home-series-shortcuts.component';
+import { seriesSearchQueryParams } from './home-series-shortcuts/series-shortcuts.config';
 import { HomeSunburstExplorerComponent } from './home-sunburst-explorer/home-sunburst-explorer.component';
 
 /**
  * An entry point card at the foot of the hero.
  */
+interface TrendingSearch {
+  /**
+   * Text on the chip, phrased the way a user would search for it
+   */
+  label: string;
+  /**
+   * The series the chip opens
+   */
+  series: string;
+  queryParams: Record<string, string>;
+}
+
 interface HeroCard {
   titleKey: string;
   leadKey: string;
@@ -60,17 +73,19 @@ interface HeroCard {
 export class HomePageComponent extends BaseComponent {
 
   /**
-   * Curated searches offered as chips under the hero search box. These are sent to /search as plain
-   * queries, so they are phrased the way a user would type them and are not translated.
+   * Chips under the hero search box. Each opens its series the same way the series tiles do
+   * (filtered on the series facet, newest reference year first) rather than a free-text query,
+   * which also matched items that only mention the series. `series` must match the stored
+   * knbs_series value exactly, see {@link SeriesShortcut.series}.
    */
   // TODO: curate this list with the repository team once there are search logs to curate it from
-  trendingSearches: string[] = [
-    'Kenya Demographic and Health Surveys',
-    'Economic Surveys',
-    'Population and Housing Censuses',
-    'Consumer Price Indices',
-    'County Statistical Abstracts',
-  ];
+  trendingSearches: TrendingSearch[] = [
+    { label: 'Kenya Demographic and Health Surveys', series: 'Kenya Demographic and Health Survey (KDHS)' },
+    { label: 'Economic Surveys', series: 'Economic Survey' },
+    { label: 'Population and Housing Censuses', series: 'Kenya Population and Housing Census (KPHC)' },
+    { label: 'Consumer Price Indices', series: 'Kenya Consumer Price Indices and Inflation Rates' },
+    { label: 'County Statistical Abstracts', series: 'County Statistical Abstract' },
+  ].map((search) => ({ ...search, queryParams: seriesSearchQueryParams(search.series) }));
 
   /**
    * The entry points shown as cards at the foot of the hero. They deliberately point at routes that

@@ -12,7 +12,8 @@
 
             <nav class="knbs-topbar__links" [attr.aria-label]="'knbs.header.utility' | translate">
                 @for (link of utilityLinks; track link.labelKey) {
-                <a [href]="link.href" target="_blank" rel="noopener">{{ link.labelKey | translate }}</a>
+                <a [href]="link.href" target="_blank" rel="noopener"
+                    [class.knbs-topbar__link--keep-case]="link.keepCase">{{ link.labelKey | translate }}</a>
                 }
                 <ds-knbs-mode-switcher></ds-knbs-mode-switcher>
                 <ds-lang-switch></ds-lang-switch>

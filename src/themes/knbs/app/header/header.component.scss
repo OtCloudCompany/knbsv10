@@ -60,6 +60,11 @@
   flex-wrap: wrap;
   gap: .25rem 1.25rem;
 
+  // Names with their own casing (KeNADA) opt out of the strip's capitals
+  .knbs-topbar__link--keep-case {
+    text-transform: none;
+  }
+
   a {
     color: #fff;
     text-decoration: none;

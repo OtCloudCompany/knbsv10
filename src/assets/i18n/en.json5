@@ -7898,7 +7898,7 @@
 
   "knbs.header.link.resource-centre": "Resource Centre",
 
-  "knbs.header.link.open-data": "KeNaDa",
+  "knbs.header.link.open-data": "KeNADA",
 
   "knbs.header.brand.name": "Kenya National Bureau of Statistics",
 
@@ -7962,7 +7962,7 @@
 
   "knbs.explorer.open": "Open",
 
-  "knbs.explorer.hint": "Point at a segment of the wheel, or at a domain in the list, to see its item count.",
+  "knbs.explorer.hint": "Point at a segment on the sunburst, or at a domain in the list, to see its item count.",
 
   "knbs.flagship.eyebrow": "Flagship releases",
 
@@ -8240,11 +8240,11 @@
 
   "relationships.Publication.isFactSheetOfReport.FactSheet": "Fact Sheets",
 
-  "relationships.Publication.isReportOfVolume.Publication": "Volume of",
+  "relationships.Publication.isReportOfVolume.Publication": "Main report",
 
-  "relationships.Publication.isReportOfKeyIndicatorReport.Publication": "Key Indicators Report of",
+  "relationships.Publication.isReportOfKeyIndicatorReport.Publication": "Main report",
 
-  "relationships.FactSheet.isReportOfFactSheet.Publication": "Fact Sheet of",
+  "relationships.FactSheet.isReportOfFactSheet.Publication": "Main report",
 
   "relationships.EconomicSurvey.isAuthorOfEconomicSurvey.Person": "Authors",
 
@@ -8404,7 +8404,7 @@
 
   "knbs.series.title": "Browse by Series",
 
-  "knbs.series.lead": "Every edition of KNBS's recurring publications, newest reference year first.",
+  "knbs.series.lead": "Every edition of KNBS's recurring publications, latest first.",
 
   "knbs.series.tile.count.one": "1 item",
 
@@ -8449,4 +8449,10 @@
   "knbs.latest.eyebrow": "Just released",
 
   "knbs.latest.viewAll": "View all statistical releases",
+
+  "knbs.listelement.badge.item-type": "Item type:",
+
+  "relationships.Publication.isComponentOfReport.Publication": "Related Outputs",
+
+  "relationships.Publication.isReportOfComponent.Publication": "Main Report",
 }
