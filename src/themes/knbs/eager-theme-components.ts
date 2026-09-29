@@ -1,4 +1,5 @@
 /* eslint-disable dspace-angular-ts/themed-component-usages */
+import { BrowseByMetadataComponent } from './app/browse-by/browse-by-metadata/browse-by-metadata.component';
 import { FooterComponent } from './app/footer/footer.component';
 import { HeaderComponent } from './app/header/header.component';
 import { HeaderNavbarWrapperComponent } from './app/header-nav-wrapper/header-navbar-wrapper.component';
@@ -15,6 +16,7 @@ import { LangSwitchComponent } from './app/shared/lang-switch/lang-switch.compon
 import { LogInComponent } from './app/shared/log-in/log-in.component';
 
 export const COMPONENTS = [
+  BrowseByMetadataComponent,
   HomeNewsComponent,
   HeaderComponent,
   HeaderNavbarWrapperComponent,
